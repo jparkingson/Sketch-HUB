@@ -1,0 +1,45 @@
+<%- include('../sections/header-login'); %>
+
+<section class="bodylog">
+    <div class="login">
+       <h2>Inicio de Sesion</h2>
+       <form class="form1" method="post">
+        <p>
+        <label class="text" for="username">Correo electrónico&nbsp;<span class="required">*</span></label>
+        <input type="text" class="user" name="username" id="username" autocomplete="username" value="" required/>			
+        </p>
+        <p>
+        <label class="text" for="password">Contraseña&nbsp;<span class="required">*</span></label>
+        <input  type="password" class="pass" name="password" id="password" autocomplete="current-password" required/>
+        </p>
+
+            <br><br>
+        <label >
+        <input class="remenber" name="rememberme" type="checkbox" id="rememberme" value="forever" /> <span>Recuérdame</span>
+          </label>
+
+        <div class="form-row">
+        
+        		
+    
+        <div class="btn-box2">
+            <a class="btn2" href="#" type="submit"  name="login" value="Acceder" onclick="cambiarNavbar()">Acceder</a>
+            <a class="btn2" href="/registro" type="" name="registrarse" value="registro">Registrarse</a>
+          
+        </div>
+     
+
+<br>
+            
+        <p >
+            <a class="olvide" href="#">¿Olvidaste la contraseña?</a>
+        </p>
+        
+    </div>
+        </form>
+    </div>
+
+
+  </section> 
+
+<%- include('../sections/footer'); %>

@@ -1,0 +1,268 @@
+/*-------------Pagina Login/register---------------*/
+.bodylog{    
+    background-color: white;
+}
+
+h2 {
+   font-style: normal;
+   font-weight: normal;
+   font-size: 40px;
+   line-height: 1.2;
+   letter-spacing: 1px;
+   text-transform: uppercase;
+   color: var(--global-palette3);
+   font-family: 'Bugfast', sans-serif;
+}
+
+/*-----------login---------*/
+.login{
+   min-height: 100vh;
+   padding: 10rem 20% 11rem;
+   width: 100%;
+   text-align: center;
+}
+.form-row > * {
+   display: grid;
+   grid-template-columns: 1fr 1fr; /* una columna */
+   grid-gap: 10px;
+   align-items: center;
+   justify-content: center;
+}
+.form1{
+   margin-top: 0;
+   border: 1px solid rgb(43, 40, 40);
+   padding: 20px;
+   margin: 2em 0;
+   text-align: left;
+   border-radius: 5px;
+   display: block;
+}
+.user{
+   box-sizing: border-box;
+   width: 100%;
+   margin: 0;
+   outline: 0;
+}
+
+.pass{
+   box-sizing: border-box;
+   width: 100%;
+   margin: 0;
+   outline: 0;
+}
+
+.text{
+   line-height: 2.4;
+   font-weight: bold;
+   color: black;
+   font-size: 15px;
+}
+.remenber{
+   display: inline-block;
+   line-height: 2.4;
+   font-weight: bold;
+   color: black;
+   font-size: 95%;
+   border: 1px solid #b7cde1;
+   padding: 10px;
+   margin: 2em 0;
+   text-align: left;
+   border-radius: 5px;
+}
+
+.olvide{
+   color: red;
+   transition: all .1s linear;
+   text-decoration: underline;
+   cursor: pointer;
+   font-size: 15px;
+   font-weight: bold;
+}
+
+.btnAcceder{
+  
+   
+   margin-right: 1em;
+}
+
+button{
+   font-style: normal;
+   font-weight: normal;
+   font-size: 15px;
+   line-height: 1.5;
+   letter-spacing: 1px;
+   font-family: 'Bugfast', sans-serif;
+   text-transform: uppercase;
+   padding: 13px 40px 13px 40px;
+   margin-top: 5px;
+   border-radius: 8px;
+   background: black;
+   color: white;
+}
+.btn-box2{
+   
+   position: relative;
+   justify-content: space-between;
+ 
+}
+.btn-box2 .btn2{
+   position: relative;
+   display: flex;
+   justify-content: center;
+   align-items: center;
+   background-color: rgb(0, 0, 0);
+   font-family: 'Bugfast', sans-serif;
+   width: auto;
+   height: 100%;
+   letter-spacing: .1rem;
+   z-index: 1;
+   overflow: hidden;
+   font-size: 2.5rem;
+   font-weight: 700;
+   color: #ffffff;
+   border-radius: 0.8rem;
+   
+   
+}
+.btn-box2 .btn2:nth-child(1), .btn2:nth-child(2){
+   opacity: 100%;
+}
+
+i {
+padding-left: 5px;
+padding-right: 5px;
+}
+
+.btn-box2 .btn2:nth-child(1):hover, .btn2:nth-child(2):hover{
+   color: rgb(0, 0, 0);
+
+}
+.btn-box2 .btn2::before{
+   content: "";
+   position: absolute;
+   top: 0;
+   left: 0;
+   width: 0;
+   height: 100%;
+   color: rgb(0, 0, 0);
+   background-color: rgb(255, 255, 255);
+   z-index: -1;
+   transition: .5s;
+   border-radius: 0.8rem;
+  
+}
+.btn-box2 .btn2:hover::before{
+   width: 100%;
+  
+}
+
+.required{
+       color: red;
+       font-weight: 700;
+       border: 0 !important;
+       text-decoration: none;
+}
+
+input {
+   font-style: normal;
+   font-weight: normal;
+   font-size: 15px;
+   line-height: 1.7;
+   font-family: var(--global-body-font-family);
+   color: var(--global-palette5);
+}
+button, input {
+   overflow: visible;
+}
+
+/*-----------Register------------*/
+.register{
+   min-height: 100vh;
+   padding: 10rem 20% 11rem;
+   width: 100%;
+   text-align: center;
+}
+.btnRegister{
+   padding: calc( 0.4em + 1px) 1em;
+   float: left;
+   margin-right: 1em;
+}
+
+.email{
+   box-sizing: border-box;
+   width: 100%;
+   margin: 0;
+   outline: 0;
+}
+
+.form2{
+   margin-top: 0;
+   border: 1px solid rgb(43, 40, 40);
+   padding: 5rem 10% 11rem;
+   margin: 2em 0;
+   text-align: left;
+   border-radius: 5px;
+   display: block;
+   height: auto;
+}
+
+.imglogo{
+float: right;
+margin-top: 5%;
+width: auto;
+height: 600px;
+}
+
+
+/*------Termina login/register----------*/
+@media (max-width: 800px) {
+    
+   .reg {
+    width: 100%;
+    }
+ 
+    
+ 
+    .login{
+     width: 100%;
+    }
+ 
+    .register{
+     width: 100%;
+    }
+    .login{
+      min-height: 100vh;
+      padding: 10rem 10% 11rem;
+      width: 100%;
+      text-align: center;
+   }
+   .form-row > * {
+      display: grid;
+      grid-template-columns: 1fr; /* una columna */
+      grid-gap: 10px;
+      align-items: center;
+      justify-content: center;
+   }
+ }
+ @media (max-width: 480px){
+   .login{
+      min-height: 100vh;
+      padding: 10rem 2% 11rem;
+      width: 100%;
+      text-align: center;
+    
+   }
+   .register{
+      min-height: 100vh;
+      padding: 10rem 10% 11rem;
+      width: 100%;
+      text-align: center;
+   }
+   .form-row > * {
+      display: grid;
+      grid-template-columns: 1fr; /* una columna */
+      grid-gap: 10px;
+      align-items: center;
+      justify-content: center;
+   }
+ }

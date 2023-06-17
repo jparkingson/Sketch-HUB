@@ -1,0 +1,97 @@
+<%- include('../sections/header'); %>
+
+<section class="products">
+    <div class="products-content">
+        <h1>Productos disponibles</h2>
+          <hr>
+    </div>
+
+    <div class="container">
+        <div class="left">
+            <div class="product-container">
+                <!--1-->
+            <div class="product">
+                    <img class="product-img" src="/img/producto1.jpg" alt="Liquid Color Banner">
+                    <h2 class="product-title">LIQUIDCOLOR BANNER</h2>
+                    <p class="price">B/.23.99</p>
+                    <button class="add-to-cart" data-max-quantity="1" data-product-id="special-product">Añadir al carrito</button>
+                </div>
+                <!--2-->
+            <div  class="product">
+                    <img class="product-img" src="/img/producto2.jpg" alt="Liquid Color Banner">
+                    <h2 class="product-title">MSA PACK GFX</h2>
+                    <p class="price">B/.23.99</p>
+                    <button class="add-to-cart">AGREGAR AL CARRITO</button>
+                </div>
+                 <!--3-->
+            <div class="product">
+                    <img class="product-img" src="/img/producto3.jpg" alt="Liquid Color Banner">
+                    <h2 class="product-title">TWITCH BANNER - WARZONE</h2>
+                    <p class="price">B/.1.99</p>
+                    <button class="add-to-cart">AGREGAR AL CARRITO</button>
+                </div>
+                 <!--4-->
+            <div class="product">
+                    <img class="product-img" src="/img/producto4.jpg" alt="Liquid Color Banner">
+                    <h2 class="product-title">URBAN COLOR BANNER</h2>
+                    <p class="price">B/.25.99</p>
+                    <button class="add-to-cart">AGREGAR AL CARRITO</button>
+                </div>
+             <!--5-->
+             <div class="product">
+                    <img class="product-img" src="/img/producto5.png" alt="Liquid Color Banner">
+                    <h2 class="product-title">PACK DE TEXTOS 3D</h2>
+                    <p class="price">B/.12.99</p>
+                    <button class="add-to-cart">AGREGAR AL CARRITO</button>
+                </div>
+             <!--6-->
+             <div class="product">
+                    <img class="product-img" src="/img/producto6.jpg" alt="Liquid Color Banner">
+                    <h2 class="product-title">PACK HISTORIAS - WARZONE</h2>
+                    <p class="price">B/.22.99</p>
+                    <button class="add-to-cart">AGREGAR AL CARRITO</button>
+                </div>
+               
+            </div>
+        
+        </div>
+        <div class="sidebar">
+            <h1>Filtros</h1>
+            <div class="search-container">
+                <input type="text" id="search-input" placeholder="Palabra clave..." class="search-input">
+                <button id="search-button" class="search-button">Buscar</button>
+              </div>
+            <h1>Categorias</h1>
+           
+              <div class="list">
+                <ul>
+                    <li>DISEÑOS</li>
+                    <li>PACKS</li>
+                    <li>PANELES</li>
+                    <li>LOGOS</li>
+                    <li>PORTADAS</li>
+                    <li>STREAM</li>
+                </ul>
+              </div>
+            
+             <div class="sidebar-cart">
+            
+
+                </div>
+                <div class="dropdown">
+                    <button class="dropbtn">PRECIO</button>
+                    <div class="dropdown-content">
+                      <a href="#">Inferior a B./10</a>
+                      <a href="#">Inferior a B./20</a>
+                      <a href="#">Inferior a B./30</a>
+                    </div>
+                  </div>
+                  
+                
+
+        </div>
+    </div>
+</section>
+
+
+<%- include('../sections/footer'); %>
