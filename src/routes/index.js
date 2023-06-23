@@ -37,7 +37,7 @@ router.get('/perfil', async (req, res) => {
       res.status(500).send('Error interno del servidor');
   }
 });
-
+/*
 router.get('/acceder', async (req, res) => {
   try {
       res.render('pages/acceder'); // Aquí debes ajustar el nombre de tu archivo de vista (ejs)
@@ -54,7 +54,7 @@ router.get('/registro', async (req, res) => {
       console.error(error);
       res.status(500).send('Error interno del servidor');
   }
-});
+});*/
 
 router.get('/perfil-creador', async (req, res) => {
   try {

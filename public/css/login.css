@@ -2,6 +2,10 @@
 .bodylog{    
     background-color: white;
 }
+.bodylog1{    
+   margin-top: -200px;
+   background-color: white;
+}
 
 h2 {
    font-style: normal;
@@ -98,7 +102,9 @@ button{
    border-radius: 8px;
    background: black;
    color: white;
+   
 }
+
 .btn-box2{
    
    position: relative;
@@ -221,8 +227,6 @@ height: 600px;
     width: 100%;
     }
  
-    
- 
     .login{
      width: 100%;
     }
@@ -254,7 +258,7 @@ height: 600px;
    }
    .register{
       min-height: 100vh;
-      padding: 10rem 10% 11rem;
+      padding: 10rem 2% 11rem;
       width: 100%;
       text-align: center;
    }

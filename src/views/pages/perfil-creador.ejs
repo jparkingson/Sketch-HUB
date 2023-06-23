@@ -1,7 +1,97 @@
 
-<%- include('../sections/header'); %>
+<%- include('../sections/header-login'); %>
 
 
+<section class="bodylog">
+    <div class="login">
+       <h2>Inicio de Sesion</h2>
+       <form class="form1" method="post">
+        <p>
+        <label class="text" for="username">Correo electrónico&nbsp;<span class="required">*</span></label>
+        <input type="text" class="user" name="username" id="username" autocomplete="username" value="" required/>			
+        </p>
+        <p>
+        <label class="text" for="password">Contraseña&nbsp;<span class="required">*</span></label>
+        <input  type="password" class="pass" name="password" id="password" autocomplete="current-password" required/>
+        </p>
+
+            <br><br>
+        <label >
+        <input class="remenber" name="rememberme" type="checkbox" id="rememberme" value="forever" /> <span>Recuérdame</span>
+          </label>
+
+        <div class="form-row">
+        
+        		
+    
+        <div class="btn-box2">
+            <a class="btn2" href="#" type="submit"  name="login" value="Acceder" onclick="cambiarNavbar()">Acceder</a>
+          
+        </div>
+    
+
+
+<br>
+            
+        <p >
+            <a class="olvide" href="#">¿Olvidaste la contraseña?</a>
+        </p>
+        
+    </div>
+        </form>
+    </div>
+
+
+  </section> 
+
+
+  <section class="bodylog1">  
+    <div class="register">
+        <h2>Registrate!</h2>
+
+		<form  id="form2" class="form2" method="post">	
+            <p >
+                <label class="text"s for="reg_username">Nombre&nbsp;<span class="required">*</span></label>
+                <input type="text" class="user" name="name" id="reg_name" autocomplete="name" value="" required/>				
+            </p>
+            <p >
+                <label class="text" for="reg_username">Apellido&nbsp;<span class="required">*</span></label>
+                <input type="text" class="user" name="lastname" id="reg_lastname" autocomplete="lastname" value="" required/>				
+            </p>
+			<p >
+					<label class="text" for="reg_username">Nombre de usuario&nbsp;<span class="required">*</span></label>
+					<input type="text" class="user" name="username" id="reg_username" autocomplete="username" value="" required/>				
+                </p>
+
+			
+			<p >
+				<label class="text" for="reg_email">Dirección de correo electrónico&nbsp;<span class="required">*</span></label>
+				<input type="email" class="email" name="email" id="reg_email" autocomplete="email" value="" required/>			
+            </p>
+
+			
+		    <p >
+					<label class="text" for="reg_password">Contraseña&nbsp;<span class="required">*</span></label>
+					<input type="password" class="pass" name="password" id="reg_password" autocomplete="new-password" required/>
+				</p>
+<br><br>
+			<p >
+                <div class="btn-box2">
+                    
+                    <a class="btn2" href="registro.html" type="submit" name="registrarse" value="registro">Registrarse</a>
+                  
+                </div> 
+			</p>
+		</form>
+
+    </div>
+</section>
+
+
+
+
+
+<!---
 <section class="perfil">
     <div class="perfil-content">
         <h1>Perfil</h2>
@@ -15,7 +105,7 @@
     </div>
     <h2>Portafolio personal</h2>
     <div class="diseñador-container">
-        <!--1-->
+        <--1--
         <div class="product">
             <img class="product-img" src="/img/producto1.jpg" alt="Liquid Color Banner">
             <h2 class="product-title">LIQUIDCOLOR BANNER</h2>
@@ -30,28 +120,28 @@
 
 
         </div>
-        <!--3-->
+        <!-3--
         <div class="product">
             <img class="product-img" src="/img/producto3.jpg" alt="Liquid Color Banner">
             <h2 class="product-title">TWITCH BANNER - WARZONE</h2>
 
 
         </div>
-        <!--4-->
+        <--4--
         <div class="product">
             <img class="product-img" src="/img/producto4.jpg" alt="Liquid Color Banner">
             <h2 class="product-title">URBAN COLOR BANNER</h2>
 
 
         </div>
-        <!--5-->
+        <--5--
         <div class="product">
             <img class="product-img" src="/img/producto5.png" alt="Liquid Color Banner">
             <h2 class="product-title">PACK DE TEXTOS 3D</h2>
 
 
         </div>
-        <!--6-->
+        <--6--
         <div class="product">
             <img class="product-img" src="/img/producto6.jpg" alt="Liquid Color Banner">
             <h2 class="product-title">PACK HISTORIAS - WARZONE</h2>
@@ -62,5 +152,5 @@
 
     </div>
 
-</section>
+</section>-->
 <%- include('../sections/footer'); %>
