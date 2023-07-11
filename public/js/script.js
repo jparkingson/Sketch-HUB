@@ -9,26 +9,6 @@ window.onscroll = () => {
 //HEADER Y FOOTER DINAMICOS
 
 //Header general
-
-
-  //simulacion de login
-  function cambiarNavbar() {
-    let elemento = document.getElementById("login");
-    elemento.innerText = "";
-  
-    localStorage.setItem("login", "");
-    alert("inicio de sesion");
-  }
-  
-  window.onload = function() {
-    var textoCambiado = localStorage.getItem("login");
-    if (textoCambiado) {
-      var textoElemento = document.getElementById("login");
-      textoElemento.innerText = textoCambiado;
-    }
-  }
-  
-
 //icon responsive
 let menuIcon = document.querySelector('#menu-icon');
 let navbar = document.querySelector('.navbar');
