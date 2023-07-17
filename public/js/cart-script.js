@@ -149,7 +149,7 @@ function addProductToCart(productImg, title, price, productId) {
     <div class="detail-box">
       <div class="cart-product-title">${title}</div>
       <div class="cart-price">${price}</div>
-      <input class="cart-quantity" type="number" value="1" ${maxQuantity ? 'max="'+maxQuantity+'"' : ''}>
+      <input class="cart-quantity" readonly type="number" value="1" ${maxQuantity ? 'max="'+maxQuantity+'"' : ''}>
     </div>
     <i class="fa fa-trash cart-remove" aria-hidden="true"></i>
   `;
@@ -167,7 +167,7 @@ function addProductToCart(productImg, title, price, productId) {
 
  // Actualiza la cantidad de productos en el carrito
 
- cartCount++; // aumenta el valor de la variable global
+cartCount++; // aumenta el valor de la variable global
  updateCartCount();
 
 

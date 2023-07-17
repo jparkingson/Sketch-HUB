@@ -7,6 +7,9 @@
    background-color: white;
 }
 
+
+
+
 h2 {
    font-style: normal;
    font-weight: normal;
@@ -109,7 +112,7 @@ button{
    
    position: relative;
    justify-content: space-between;
- 
+ text-align: center;
 }
 .btn-box2 .btn2{
    position: relative;
@@ -141,7 +144,7 @@ padding-right: 5px;
 
 .btn-box2 .btn2:nth-child(1):hover, .btn2:nth-child(2):hover{
    color: rgb(0, 0, 0);
-
+background-color: white;
 }
 .btn-box2 .btn2::before{
    content: "";
@@ -159,7 +162,10 @@ padding-right: 5px;
 }
 .btn-box2 .btn2:hover::before{
    width: 100%;
-  
+}
+
+#reg{
+   margin-left: 150px;
 }
 
 .required{
@@ -222,7 +228,10 @@ height: 600px;
 
 /*------Termina login/register----------*/
 @media (max-width: 800px) {
-    
+   html{
+      font-size: 55%;
+  } 
+  
    .reg {
     width: 100%;
     }
@@ -246,7 +255,12 @@ height: 600px;
       grid-gap: 10px;
       align-items: center;
       justify-content: center;
+      
    }
+   #reg{
+      display: block;
+      
+  }
  }
  @media (max-width: 480px){
    .login{
@@ -270,3 +284,4 @@ height: 600px;
       justify-content: center;
    }
  }
+ 

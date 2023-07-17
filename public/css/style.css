@@ -767,6 +767,59 @@ margin-bottom: 2rem;
     animation: showRight 1s ease forwards ;
     animation-delay: calc(.1s * var(--i)) ;
 }
+
+/* Estilo para el elemento select */
+.styled-select {
+  display: block;
+  width: 100%;
+  padding: 10px;
+  border: 1px solid grey;
+  border-radius: 4px;
+  font-size: 14px;
+  background-color: #f7f7f7;
+}
+
+/* Estilo para el texto del label */
+.text1 {
+    line-height: 2.4;
+    font-weight: bold;
+    color: black;
+    font-size: 15px;
+}
+
+/* Estilo para el asterisco de requerido */
+.required {
+  color: red;
+}
+
+/* Estilo para el contenedor */
+
+  
+  /* Estilo para el label */
+  .text {
+    font-weight: bold;
+  }
+  
+  /* Estilo para el input file */
+  input[type="file"] {
+    display: block;
+    width: 100%;
+    padding: 10px;
+    border: 1px solid grey;
+    border-radius: 4px;
+    background-color: #f7f7f7;
+    font-size: 14px;
+    line-height: 1.5;
+  }
+  
+  /* Estilo para el span dentro del label */
+  label span {
+    color: red; /* Puedes ajustar el color según tus preferencias */
+  }
+  
+  
+  
+  
 /*RESPONSIVE*/
 
 /*general*/

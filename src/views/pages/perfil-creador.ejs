@@ -5,10 +5,10 @@
 <section class="bodylog">
     <div class="login">
        <h2>Inicio de Sesion</h2>
-       <form class="form1" method="post">
+       <form action="/perfil-creador/login" class="form1" method="post">
         <p>
         <label class="text" for="username">Correo electrónico&nbsp;<span class="required">*</span></label>
-        <input type="text" class="user" name="username" id="username" autocomplete="username" value="" required/>			
+        <input type="text" class="user" name="email" id="username" autocomplete="username" value="" required/>			
         </p>
         <p>
         <label class="text" for="password">Contraseña&nbsp;<span class="required">*</span></label>
@@ -25,16 +25,16 @@
         		
     
         <div class="btn-box2">
-            <a class="btn2" href="#" type="submit"  name="login" value="Acceder" onclick="cambiarNavbar()">Acceder</a>
-            <a class="btn2" href="#registrar" type="" name="registrarse" value="registro">Registrarse</a>
+                    <input class="btn2" href="#" type="submit"  name="login" value="Acceder" onclick="cambiarNavbar()">
+                    <a class="btn2" href="#registro" type="submit" name="registrarse" value="registro">Registrarse</a>
+            
         </div>
+
     
-
-
 <br>
             
         <p >
-            <a class="olvide" href="#">¿Olvidaste la contraseña?</a>
+            <a class="olvide" href="/olvide">¿Olvidaste la contraseña?</a>
         </p>
         
     </div>
@@ -43,50 +43,74 @@
 
 
   </section> 
-
-
   <section class="bodylog1">  
-    <div id="registrar" class="register">
+    <div id="registro" class="register">
         <h2>Registrate!</h2>
 
-		<form  id="form2" class="form2" method="post">	
-            <p >
-                <label class="text"s for="reg_username">Nombre&nbsp;<span class="required">*</span></label>
-                <input type="text" class="user" name="name" id="reg_name" autocomplete="name" value="" required/>				
+		<form action="/perfil-creador/validar" class="form2" method="post" >	
+
+
+            <p>
+                <label class="text1" for="tipo-usuario">Tipo de usuario &nbsp;<span class="required">*</span></label>
+                <select id="tipo-usuario" name="reg_tipo_usuario" class="styled-select">
+                    <option value="Diseñador">Diseñador</option>
+                    <option value="Comprador">Comprador</option>
+                </select>
             </p>
-            <p >
+
+            <p>
+                <label class="text" for="reg_username">Nombre&nbsp;<span class="required">*</span></label>
+                <input type="text" class="user" name="reg_name" id="reg_name" autocomplete="name" value="" required/>				
+            </p>
+            <p>
                 <label class="text" for="reg_username">Apellido&nbsp;<span class="required">*</span></label>
-                <input type="text" class="user" name="lastname" id="reg_lastname" autocomplete="lastname" value="" required/>				
+                <input type="text" class="user" name="reg_lastname" id="reg_lastname" autocomplete="lastname" value="" required/>				
             </p>
-			<p >
-					<label class="text" for="reg_username">Nombre de usuario&nbsp;<span class="required">*</span></label>
-					<input type="text" class="user" name="username" id="reg_username" autocomplete="username" value="" required/>				
-                </p>
-
-			
-			<p >
-				<label class="text" for="reg_email">Dirección de correo electrónico&nbsp;<span class="required">*</span></label>
-				<input type="email" class="email" name="email" id="reg_email" autocomplete="email" value="" required/>			
+            <p>
+                <label class="text" for="reg_email">Dirección de correo electrónico&nbsp;<span class="required">*</span></label>
+                <input type="email" class="email" name="reg_email" id="reg_email" autocomplete="email" value="" required/>			
+            </p>
+            
+            <p>
+                <label class="text" for="reg_password">Contraseña&nbsp;<span class="required">*</span></label>
+                <input type="password" class="pass" name="reg_password" id="reg_password" autocomplete="new-password" required/>
+            </p>
+            <p>
+                <label class="text" for="reg_phone">Telefono&nbsp;<span></span></label>
+                <input type="text" class="user" name="reg_phone" id="reg_phone" autocomplete="phone" value="" />				
             </p>
 
-			
-		    <p >
-					<label class="text" for="reg_password">Contraseña&nbsp;<span class="required">*</span></label>
-					<input type="password" class="pass" name="password" id="reg_password" autocomplete="new-password" required/>
-				</p>
-<br><br>
-			<p >
+            <p>
+                <label class="text" for="reg_direccion">Dirección&nbsp;<span></span></label>
+                <input type="text" class="user" name="reg_direccion" id="reg_direccion" autocomplete="direccion" value="" />				
+            </p>
+            <p>
+                <label class="text" for="reg_city">Ciudad&nbsp;<span></span></label>
+                <input type="text" class="user" name="reg_city" id="reg_city" autocomplete="city" value="" />				
+            </p>
+            <p>
+                <label class="text" for="reg_estado">Estado&nbsp;<span></span></label>
+                <input type="text" class="user" name="reg_estado" id="reg_estado" autocomplete="estado" value="" />				
+            </p>
+            <p>
+                <label class="text" for="reg_postal">Codigo Postal&nbsp;<span></span></label>
+                <input type="text" class="user" name="reg_postal" id="reg_postal" autocomplete="postal" value="" />				
+            </p>
+
+            <p>
+                <label class="text" for="reg_photo">Foto&nbsp;<span></span></label>
+                <input type="file" class="user" name="reg_photo" id="reg_photo" accept="image/*" autocomplete="postal" value="" />				
+            </p> 
+              
+            <br><br>
+            <p>
                 <div class="btn-box2">
-                    
-                    <a class="btn2" href="registro.html" type="submit" name="registrarse" value="registro">Registrarse</a>
-                  
+                    <input class="btn2" name="registrarse" class="btn2" type="submit" value="Registrarse">  
                 </div> 
-			</p>
-		</form>
-
+            </p>
+        </form>
     </div>
 </section>
-
 
 
 
