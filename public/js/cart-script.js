@@ -4,15 +4,28 @@ let cartIcon = document.getElementById('cart-icon');
 let cart = document.querySelector('.cart');
 let cartRemove = document.querySelector('#close-cart');
 
+
+// carrito.js
+
+
+
+
+/*
 //abrir carrito
 cartIcon.onclick = () => {
   cart.classList.add("active");
 };
+*/
 //cerrar carrito
+/*
 cartRemove.onclick = () => {
   cart.classList.remove("active");
-};
+};*/
 
+
+
+
+/*
 //Comprobar que todo este cargado para utilizar carrito
 if (document.readyState == 'loading'){
   document.addEventListener('DOMContentLoaded', ready)
@@ -20,6 +33,8 @@ if (document.readyState == 'loading'){
 }else{
   ready();
 }
+*/
+/*
 var cartCount = 0;
 
 //funciones
@@ -205,7 +220,7 @@ function updatetotal(){
 
 // llama a la función updateCartCount al cargar la página para mostrar la cantidad inicial de productos en el carrito
 window.addEventListener('load', updateCartCount);
-
+*/
 
 
 

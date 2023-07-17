@@ -6,12 +6,12 @@
 h2 {
    font-style: normal;
    font-weight: normal;
-   font-size: 40px;
+   font-size: 15px;
    line-height: 1.2;
    letter-spacing: 1px;
    text-transform: uppercase;
    color: var(--global-palette3);
-   font-family: 'Bugfast', sans-serif;
+  
 }
 
 /*-----------login---------*/

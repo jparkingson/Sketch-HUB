@@ -9,7 +9,7 @@
     height: auto;
 }
 
-.usuario-img{
+.perfil-img{
     border-radius: 50%;
     border: 1px solid black;
     width: 300px;
@@ -31,7 +31,7 @@
 
 .perfil-content h2{
     font-size: 3.6rem;
-   
+
     font-weight: 700;
     line-height: 1.3;
     background: transparent; 

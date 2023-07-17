@@ -1,0 +1,70 @@
+<%- include('../sections/header'); %>
+
+<!--Secciones-->
+<section class="products">
+    
+    <div class="products-content">
+        <h1>TU CARRITO</h2>
+        <hr>
+        
+        </div>
+<!-- carrito.ejs -->
+<table class="table tabla-carrito">
+  <thead>
+    <% if (!productos || productos.length == 0) { %>
+      <tr>
+        <td colspan="3" class="text-center">No hay productos en el carrito</td>
+      </tr>
+      <% } else { %>
+   
+
+    <tr>
+      <th>Producto</th>
+      <th></th>
+      <th>Descripcion</th>
+      <th>Precio</th>
+      <th>Acciones</th>
+    </tr>
+  </thead>
+  <tbody>
+
+    <% productos.forEach((producto) => { %>
+      
+
+    <tr>
+      <td>
+        <img class="productCarrito-img" src="<%= producto.imgenURL %>" alt="<%= producto.nombre %>">
+      </td>
+      <td>
+        <%= producto.nombreProducto %>
+      </td>
+      <td>
+        <h2 class="product-title"><%= producto.descripcion %></h2>
+      </td>
+      <td>
+        <p class="price"><%= producto.precio %></p>
+      </td>
+      <td>
+        <form action="/carrito/eliminar" method="POST">
+          <input type="hidden" name="productoId" value="<%= producto.idProducto %>">
+          <button type="submit" class="btn btn-danger">Eliminar</button>
+        </form>
+      </td>
+    </tr>
+    <% }); %>
+    <tr>
+      <td colspan="2">Total</td>
+      <td></td>
+    </tr>
+    <% } %>
+  </tbody>
+</table>
+
+  
+        
+
+
+</section>
+
+
+<%- include('../sections/footer'); %>

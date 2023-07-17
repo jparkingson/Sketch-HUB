@@ -25,6 +25,11 @@ html{
     src: url('../fonts/Bugfast.otf') format('truetype');
     font-weight: 900;
 }
+@font-face {
+    font-family: 'Bebas Neue';
+    src: url('../fonts/BebasNeue-Regular.otf') format('truetype');
+    font-weight: 900;
+}
 body{
     background:#ffffff;
 }
@@ -105,7 +110,7 @@ body{
     color: #fff;
     font-weight: 600;
     z-index: 100;
- 
+   text-decoration: none;
 }
 .navbar a:hover{
     color: aqua;
@@ -415,6 +420,8 @@ margin-bottom: 2rem;
     margin-bottom: 3rem;
     box-shadow: 0 0 15px black;
 }
+
+
 .product:hover img{
     opacity: 0.7;
 
@@ -453,13 +460,13 @@ margin-bottom: 2rem;
     background: transparent;
 }
 
-.container{
+.container-tienda{
     width: 100%;
     display: flex;
     margin-bottom: 20px;
 }
-.container .left{
-    width: 70%;
+.container-tienda .left{
+    width: 200%;
     display: grid;
     grid-gap: 20px;
 }
@@ -503,6 +510,17 @@ margin-bottom: 2rem;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
    
 }
+.productCarrito-img{
+    max-width: 150px; /* Ajusta el tamaño máximo de la imagen según tus preferencias */
+  height: auto; /* Mantiene la proporción de la imagen */
+}
+th, td{
+    background-color: lightgray;
+    padding: 10px;
+    font-size: 30px;
+    font-family: 'Bebas Neue', sans-serif;
+}
+
 .product h3 {
     font-size: 24px;
     margin: 10px 0;
@@ -523,6 +541,7 @@ margin-bottom: 2rem;
     transform: translateY(20px);
     opacity: 0;
     transition: 0.3s all;
+    font-family: 'Bebas Neue', sans-serif;
   } 
 .product:hover button.add-to-cart {
     background-color: gray;
@@ -842,12 +861,12 @@ margin-bottom: 2rem;
       align-items: center;
 
     }
-    .container{
+    .container-tienda{
         width: auto;
         display: block;
         margin-bottom: 10px;
     }
-     .container .left{
+     .container-tienda .left{
         width: auto;
         
     }
