@@ -6,19 +6,24 @@
           <hr>
     </div>
 
-    <div class="container">
+    <div class="container-tienda">
         <div class="left">
-            <div class="product-container">
-                <!--1-->
-                <% productos.forEach((producto) => { %>
-                    <div class="product">
-                            <img class="product-img" src="<%= producto.img_url %>" alt="Liquid Color Banner">
-                            <h2 class="product-title"><%= producto.nombre %></h2>
-                            <p class="price"><%= producto.precio %></p>
-                            <button class="add-to-cart" data-max-quantity="1" data-product-id="special-product">Añadir al carrito</button>
-                        </div>
-                        <% }); %>
+          <div class="product-container">
+            <!--1-->
+            <% productos.forEach((producto) => { %>
+        <div class="product">
+                <img class="product-img" src="/productos/img/<%= producto.imagenURL %>" alt="Liquid Color Banner">
+                <h2 class="product-title"><%= producto.nombreProducto %></h2>
+                <p class="price"><%= producto.precio %></p>
+                <form action="/carrito/agregar" method="post">
+                    <input type="hidden" name="id" value="<%= producto.idProducto %>">
+                    <button id="add-to-cart-button" class="add-to-cart" data-max-quantity="1" data-product-id="special-product">Añadir al carrito</button>
+                </form>
             </div>
+            <% }); %>
+           <hr>
+          
+        </div>
         
         </div>
         <div class="sidebar">

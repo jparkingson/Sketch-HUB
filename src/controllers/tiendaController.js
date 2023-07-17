@@ -1,10 +1,15 @@
 const db = require('../../db/db');
 
 exports.mostrarTienda = (req, res) => {
-  db.query('SELECT * FROM productos', (error, results) => {
-    if (error) {
-      throw error;
+  const query = 'SELECT * FROM producto LIMIT 6';
+
+  db.query(query, (error, resultados) => {
+
+    if (!req.session.cart) {
+      req.session.cart = [];
     }
-    res.render('pages/tienda', { productos: results });
+
+    res.render('pages/index', { productos: resultados, cart: req.session.cart });
   });
 };
+  

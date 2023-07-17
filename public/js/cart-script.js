@@ -5,15 +5,27 @@ let cart = document.querySelector('.cart');
 let cartRemove = document.querySelector('#close-cart');
 
 
+// carrito.js
+
+
+
+
+/*
 //abrir carrito
 cartIcon.onclick = () => {
   cart.classList.add("active");
 };
+*/
 //cerrar carrito
+/*
 cartRemove.onclick = () => {
   cart.classList.remove("active");
-};
+};*/
 
+
+
+
+/*
 //Comprobar que todo este cargado para utilizar carrito
 if (document.readyState == 'loading'){
   document.addEventListener('DOMContentLoaded', ready)
@@ -21,7 +33,7 @@ if (document.readyState == 'loading'){
 }else{
   ready();
 }
-
+*/
 /*
 var cartCount = 0;
 

@@ -1,10 +1,21 @@
 const mysql = require('mysql');
+/*
 const db = mysql.createConnection({
  host: 'localhost',
  user: 'KevinS',
  password: 'kevin123',
  database: 'Trabajo_En_Clase'
 });
+*/
+
+const db = mysql.createConnection({
+    host: 'localhost',
+    user: 'KevinS',
+    password: 'kevin123',
+    database: 'sketch_hub'
+   });
+   
+
 db.connect((error) => {
  if (error) {
  throw error;

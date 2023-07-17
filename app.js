@@ -7,22 +7,29 @@ const morgan = require('morgan');
 
 //Configuración
 app.set('port',process.env.PORT || 3000);
-app.set('views', path.join(__dirname, 'views')); //Carpeta de las vistas
+app.set('views', path.join(__dirname, 'src/views')); //Carpeta de las vistas
 app.set('view engine', 'ejs'); // Motor de plantilla
+
+// middlewares
+app.use(morgan('dev')); // Con morgan podemos ver los procesos en la vista de la consola.
+app.use(express.urlencoded({extended: true})) //Para interpretar los datos que vienen de un formulario y poder procesarlo
+
+
+
 // Configuración de la sesión
 app.use(session({
   secret: 'my secret',
   resave: false,
-  saveUninitialized: false,
+  saveUninitialized: true,
   cookie: { secure: false } // cambiar a true si estás en un entorno https
  }));
 
 
 // Importar rutas
-const indexRoutes = require('./routes/index');
+const indexRoutes = require('./src/routes/index');
 //const productosRoutes = require('./routes/productos');
-const carritoRoutes = require('./routes/carrito');
-const tiendaRoutes = require('./routes/tienda');
+const carritoRoutes = require('./src/routes/carrito');
+const tiendaRoutes = require('./src/routes/tienda');
 
 
 // rutas
@@ -31,14 +38,11 @@ app.use('/', indexRoutes);
 app.use('/carrito', carritoRoutes);
 app.use('/tienda', tiendaRoutes);
 
-app.use(express.static(path.join(__dirname,'../public')));
-app.use(express.static(path.join(__dirname,'../node_modules')));
+app.use(express.static(path.join(__dirname,'/public')));
+app.use(express.static(path.join(__dirname,'/node_modules')));
+
 /*app.get('/', (req, res) => res.send('¡Hola Mundo!'));*/
 
-
-// middlewares
-app.use(morgan('dev')); // Con morgan podemos ver los procesos en la vista de la consola.
-app.use(express.urlencoded({extended: false})) //Para interpretar los datos que vienen de un formulario y poder procesarlo
 
 
 
