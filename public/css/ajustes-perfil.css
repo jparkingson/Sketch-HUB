@@ -13,8 +13,25 @@
 	flex: 1;
 }
 
+.nav-link{
+	font-size: 15px;
+}
+
 .form-group {
 	margin-bottom: 1.5rem;
+	font-size: 23px;
+}
+
+.form-control{
+	font-size: 13px;
+}
+
+.btn.btn-primary{
+	font-size: 20px;
+}
+
+.btn.btn-light{
+	font-size: 20px;
 }
 
 .nav-pills a.nav-link {

@@ -1,6 +1,7 @@
 
 <%- include('../sections/header'); %>
 
+<script type="text/javascript" src="js/cargar-etiquetas.js"></script> 
 
 <section class="perfil">
     <div class="perfil-content">
@@ -8,10 +9,14 @@
             <hr>
             <img class="usuario-img" src="/img/usuario.png" alt="Usuario">
             <h2>Diseñador <i class="fa-solid fa-check"></i></h2>
+            <div class="etiquetas-container"></div>
             <div class="btn-box">
                 <a href="/editar-perfil" class="btn">Editar Perfil</a>
             </div>
             <hr>
+    </div>
+    <div class="btn-box">
+        <a href="/cargar-diseno" class="btn">Cargar diseño</a>
     </div>
     <h2>Portafolio personal</h2>
     <div class="diseñador-container">
@@ -63,4 +68,7 @@
     </div>
 
 </section>
+
+
+
 <%- include('../sections/footer'); %>

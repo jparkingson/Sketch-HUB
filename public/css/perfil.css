@@ -16,6 +16,10 @@
     margin-bottom: 20   px;
 }  
 
+.etiquetas-container{
+	font-size: 17px;
+}
+
 .perfil-content {
     width: 100%;
     text-align: center;

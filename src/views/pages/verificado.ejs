@@ -1,0 +1,62 @@
+<%- include('../sections/header-verificado'); %>
+
+  <section>
+    <h1 class="mb-5">Obtención de Verificado</h1>
+    <img class="center-block marca" src="/img/logo.png" alt="Logo">
+    <h2>Al obtener el verificado entra a ser partner de nosotros, en la cual hay algunas condiciones, el partner de ser
+      diseñador cuesta 50 centavos al mes,
+      también al usuario que compre un diseño que le pertenece a usted como creador, se le registrará la compra en su
+      perfil la cual podrá ver,
+      para evitar el mal uso de su producto el usuario deberá aceptar unos términos y condiciones los cuales aseguran
+      que no podrán usar compartir su diseño
+      con otras personas.
+    </h2>
+
+    <form id="form">
+      <div class="tab-content p-4 p-md-5" id="v-pills-tabContent">
+        <div class="tab-pane fade show active" id="account" role="tabpanel" aria-labelledby="account-tab">
+          <h3 class="mb-4"></h3>
+          <div class="row">
+            <div class="col-md-6">
+              <div class="form-group">
+                <label>Nombre</label>
+                <input type="text" name="nombre" id="nombre" class="form-control" placeholder="Nombre" required>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="form-group">
+                <label>Apellido</label>
+                <input type="text" name="apellido" id="apellido" class="form-control" placeholder="Apellido" required>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="form-group">
+                <label>Correo</label>
+                <input type="email" name="email" id="email" class="form-control" placeholder="correo@gmail.com" required>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="form-group">
+                <label>Número de teléfono</label>
+                <input type="text" name="telefono" id="telefono" id="descripcion" class="form-control" placeholder="+507" required>
+              </div>
+            </div>
+            <div class="col-md-12">
+              <div class="form-group">
+                <label>Descripción</label>
+                <textarea class="form-control" rows="4" name="descripcion" required></textarea>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="btn-box">
+        <button class="btn" id="enviar" type="submit">Enviar solicitud</button>
+      </div>
+    </form>
+    
+  </section>
+ 
+  
+
+<%- include('../sections/footer-verificado'); %>

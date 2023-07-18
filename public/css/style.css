@@ -348,6 +348,11 @@ section{
     
     
 }
+
+.btn-box .btn:hover{
+    color: white;
+}
+
 .btn-box .btn:nth-child(1){
     opacity: 75%;
 }

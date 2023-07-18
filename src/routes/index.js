@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 
+
 // Ruta para la página principal
 router.get('/', async (req, res) => {
     try {
@@ -74,5 +75,22 @@ router.get('/editar-perfil', async (req, res) => {
   }
 });
 
+router.get('/verificado', async (req, res) => {
+  try {
+      res.render('pages/verificado'); // Aquí debes ajustar el nombre de tu archivo de vista (ejs)
+  } catch (error) {
+      console.error(error);
+      res.status(500).send('Error interno del servidor');
+  }
+});
 
-  module.exports = router;
+router.get('/cargar-diseno', async (req, res) => {
+  try {
+      res.render('pages/cargar-diseno'); // Aquí debes ajustar el nombre de tu archivo de vista (ejs)
+  } catch (error) {
+      console.error(error);
+      res.status(500).send('Error interno del servidor');
+  }
+});
+
+module.exports = router;

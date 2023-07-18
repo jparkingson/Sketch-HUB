@@ -1,0 +1,60 @@
+<%- include('../sections/header-verificado'); %>
+    <section>
+        <h1 class="mb-5">Cargar diseño</h1>
+        <form id="form" method="POST" action="/cargar" enctype="multipart/form-data">
+            <div class="tab-content p-4 p-md-5" id="v-pills-tabContent">
+              <div class="tab-pane fade show active" id="account" role="tabpanel" aria-labelledby="account-tab">
+                <h3 class="mb-4"></h3>
+                <div class="row">
+                  <div class="col-md-6">
+                    <div class="form-group">
+                      <label>Nombre del Producto</label>
+                      <input type="text" name="producto" id="producto" class="form-control" placeholder="Nombre del Producto" required>
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <div class="form-group">
+                      <label>Categoria</label>
+                      <select name="categoria" id="categoria" class="form-control" placeholder="categoria" required>
+                        <option value="Overlays">Overlays</option>
+                        <option value="Plantillas">Plantillas</option>
+                        <option value="Alertas">Alertas</option>
+                        <option value="Emoticones">Emoticones</option>
+                        <option value="Paneles">Paneles</option>
+                        <option value="Animaciones">Animaciones</option>
+                      </select>
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <div class="form-group">
+                      <label>Precio</label>
+                      <input type="number" name="precio" id="precio" class="form-control" placeholder="$00.00" required>
+                    </div>
+                  </div>
+                  <div class="col-md-12">
+                    <div class="form-group">
+                      <label>Descripción</label>
+                      <textarea class="form-control" rows="4" name="descripcion" required></textarea>
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <div class="form-group">
+                      <label>Imagen</label>
+                      <input type="file" name="imagen" id="imagen" class="form-control" accept="image/*" required>
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <div class="form-group">
+                      <label>Archivo .rar</label>
+                      <input type="file" name="archivoRAR" id="archivoRAR" class="form-control" accept=".rar" required>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="btn-box">
+              <button class="btn" type="submit">Cargar</button>
+            </div>
+          </form>
+    </section>
+<%- include('../sections/footer'); %>
