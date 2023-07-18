@@ -78,7 +78,7 @@ exports.filtrarProductos = (req, res) => {
       db.query(sql, (err, result)=>{
           if(err) throw err;
        
-          let iterator = Math.max(1, page - 0);
+          let iterator = Math.max(4, page - 1);
           let endingLink = Math.min(iterator + 9, numberOfPages);
           if (endingLink < (page + 0)) {
             iterator -= (page + 1) - endingLink;
@@ -117,7 +117,7 @@ exports.filtrarTexto = (req, res) => {
       db.query(sql, (err, result)=>{
           if(err) throw err;
        
-          let iterator = Math.max(1, page - 0);
+          let iterator = Math.max(1, page - 5);
           let endingLink = Math.min(iterator + 9, numberOfPages);
           if (endingLink < (page + 0)) {
             iterator -= (page + 1) - endingLink;
@@ -130,7 +130,7 @@ exports.filtrarTexto = (req, res) => {
 };
 
 exports.precioProductos = (req, res) => {
-  let precio  = req.query.precio;
+  const precio  = req.query.precio;
   let sql = `SELECT * FROM producto WHERE precio <= '${precio}' ORDER BY idProducto DESC`;
   db.query(sql, (err, result) => {
       if(err) throw err;
@@ -156,7 +156,7 @@ exports.precioProductos = (req, res) => {
       db.query(sql, (err, result)=>{
           if(err) throw err;
        
-          let iterator = Math.max(1, page - 0);
+          let iterator = Math.max(1, page - 5);
           let endingLink = Math.min(iterator + 9, numberOfPages);
           if (endingLink < (page + 0)) {
             iterator -= (page + 1) - endingLink;

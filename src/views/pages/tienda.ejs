@@ -58,9 +58,22 @@
                     <input type="hidden" name="categoria" value="plantillas">
                     <button class="b-list">Plantillas</button>
                   </form>
-                  
-               
-               
+                  <form action="/tienda/filtrar" method="GET">
+                    <input type="hidden" name="categoria" value="alertas">
+                    <button class="b-list">Alertas</button>
+                  </form>
+                  <form action="/tienda/filtrar" method="GET">
+                    <input type="hidden" name="categoria" value="emoticones">
+                    <button class="b-list">Emoticones</button>
+                  </form>
+                  <form action="/tienda/filtrar" method="GET">
+                    <input type="hidden" name="categoria" value="animaciones">
+                    <button class="b-list">Animaciones</button>
+                  </form>
+                  <form action="/tienda/filtrar" method="GET">
+                    <input type="hidden" name="categoria" value="paneles">
+                    <button class="b-list">Paneles</button>
+                  </form>
                 </ul>
               </div>
             
@@ -72,12 +85,21 @@
                     <button class="dropbtn">PRECIO</button>
                     <div class="dropdown-content">
                       <form action="/tienda/precio" method="GET">
-                        <input type="hidden" name="categoria" value="9.99">
+                        <input type="hidden" name="precio" value="9.99">
                         <button class="b-list">Inferior a $9.99</button>
                       </form>
-                      <a href="#">Inferior a B./10</a>
-                      <a href="#">Inferior a B./20</a>
-                      <a href="#">Inferior a B./30</a>
+                      <form action="/tienda/precio" method="GET">
+                        <input type="hidden" name="precio" value="19.99">
+                        <button class="b-list">Inferior a $19.99</button>
+                      </form>
+                      <form action="/tienda/precio" method="GET">
+                        <input type="hidden" name="precio" value="29.99">
+                        <button class="b-list">Inferior a $29.99</button>
+                      </form>
+                      <form action="/tienda/precio" method="GET">
+                        <input type="hidden" name="precio" value="49.99">
+                        <button class="b-list">Inferior a $49.99</button>
+                      </form>
                     </div>
                   </div>
                   
