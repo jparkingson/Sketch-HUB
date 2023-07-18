@@ -3,6 +3,8 @@ const express = require('express');
 const app = express();
 const session = require('express-session');
 const morgan = require('morgan');
+const bodyParser = require('body-parser');
+
 
 
 //Configuración
@@ -13,7 +15,7 @@ app.set('view engine', 'ejs'); // Motor de plantilla
 // middlewares
 app.use(morgan('dev')); // Con morgan podemos ver los procesos en la vista de la consola.
 app.use(express.urlencoded({extended: true})) //Para interpretar los datos que vienen de un formulario y poder procesarlo
-
+app.use(bodyParser.urlencoded({ extended: false }));
 
 
 // Configuración de la sesión

@@ -41,6 +41,7 @@ exports.agregarProducto = (req, res) => {
 
   for (let i = 0; i < req.session.cart.length; i++) {
     if (req.session.cart[i].idProducto === productId) {
+      
       count++;
     }
   }
@@ -59,12 +60,6 @@ exports.agregarProducto = (req, res) => {
 };
 
   
-
-
-
-
-
-
 // Eliminar un producto del carrito
 exports.eliminarProducto = (req, res) => {
   const productId = req.params.id;
@@ -79,6 +74,27 @@ exports.eliminarProducto = (req, res) => {
 
   res.redirect('/carrito');
 };
+
+exports.eliminarProducto = (request, response) => {
+
+	const product_id = request.query.id;
+
+	for(let i = 0; i < request.session.cart.length; i++)
+	{
+		if(request.session.cart[i].product_id === product_id)
+		{
+			request.session.cart.splice(i, 1);
+		}
+	}
+
+	response.redirect("/carrito");
+
+};
+
+
+
+
+
 
 exports.mostrarCarrito = (req, res) => {
   res.render('pages/carrito', { productos: req.session.cart });

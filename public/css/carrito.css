@@ -189,25 +189,25 @@ header.sticky .btn-buy:hover{
     text-decoration: none;
   }
   
-  .list li {
+  .list .b-list {
     color: white;
     background-color: #000000;
     padding: 10px;
     margin-bottom: 5px;
-    
+    width: 100%;
   }
   
-  .list li:hover {
+  .list .b-list:hover {
     background-color: #ffffff;
     color: black;
   }
   
-  .list li:first-child {
+  .list .b-list:first-child {
     border-top-left-radius: 5px;
     border-top-right-radius: 5px;
   }
   
-  .list li:last-child {
+  .list .b-list:last-child {
     border-bottom-left-radius: 5px;
     border-bottom-right-radius: 5px;
   }

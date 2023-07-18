@@ -30,7 +30,7 @@ exports.mostrarIndex = (req, res) => {
 };*/
 
 exports.mostrarIndex = (req, res) => {
-  const query = 'SELECT * FROM producto LIMIT 6';
+  const query = 'SELECT * FROM producto ORDER BY idProducto DESC LIMIT 6';
 
   db.query(query, (error, resultados) => {
 
