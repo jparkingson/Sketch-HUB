@@ -19,11 +19,11 @@ menuIcon.onclick = () =>{
 }
 //scroll
 //Recargar pagina hacia arriba
-window.onload = function() {
+/*window.onload = function() {
   window.scrollTo(0, 0);
 }
-
-
+*/
+/*
 //cambiar paginas
 // Obtener todos los elementos de enlace
 const links = document.querySelectorAll('a');
@@ -43,3 +43,4 @@ links.forEach(link => {
   });
 });
 
+*/

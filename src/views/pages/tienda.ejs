@@ -11,13 +11,18 @@
           <div class="product-container">
             <!--1-->
             <% productos.forEach((producto) => { %>
-        <div class="product">
-                <img class="product-img" src="/productos/img/<%= producto.imagenURL %>" alt="Liquid Color Banner">
+              <div class="product">
+                <img class="product-img" src="/productos/img/<%= producto.imagenURL %>" alt=" <%= producto.nombreProducto %> ">
                 <h2 class="product-title"><%= producto.nombreProducto %></h2>
                 <p class="price"><%= producto.precio %></p>
+                <p class="price"><%= producto.categoria  %></p>
                 <form action="/carrito/agregar" method="post">
-                    <input type="hidden" name="id" value="<%= producto.idProducto %>">
-                    <button id="add-to-cart-button" class="add-to-cart" data-max-quantity="1" data-product-id="special-product">Añadir al carrito</button>
+                    <input type="hidden" name="idProducto" value="<%= producto.idProducto %>">
+                    <input type="hidden" name="imagenURL" value=" <%= producto.imagenURL  %> ">
+                    <input type="hidden" name="nombreProducto" value=" <%= producto.nombreProducto  %> ">
+                    <input type="hidden" name="descripcion" value=" <%= producto.descripcion  %> ">
+                    <input type="hidden" name="precio" value=" <%= producto.precio %>">
+                    <button class="add-to-cart" data-max-quantity="1" data-product-id="special-product">Añadir al carrito</button>
                 </form>
             </div>
             <% }); %>
@@ -27,21 +32,48 @@
         
         </div>
         <div class="sidebar">
-            <h1>Filtros</h1>
+            <h1>Filtrar</h1>
             <div class="search-container">
-                <input type="text" id="search-input" placeholder="Palabra clave..." class="search-input">
-                <button id="search-button" class="search-button">Buscar</button>
+              <form action="/tienda/buscar" method="GET">
+                <input type="text" placeholder="Buscar.." name="texto" class="search-input">
+                <button class="b-list"><i class="fa fa-search"></i></button>
+              </form>
+             
               </div>
             <h1>Categorias</h1>
            
               <div class="list">
                 <ul>
-                    <li>DISEÑOS</li>
-                    <li>PACKS</li>
-                    <li>PANELES</li>
-                    <li>LOGOS</li>
-                    <li>PORTADAS</li>
-                    <li>STREAM</li>
+                  <form action="/tienda" method="GET">
+                    <input type="hidden" name="categoria">
+                    <button class="b-list">todos</button>
+                  </form>
+
+                   <form action="/tienda/filtrar" method="GET">
+                    <input type="hidden" name="categoria" value="overlays">
+                   <button class="b-list">Overlays</button>
+                  </form>
+                  
+                  <form action="/tienda/filtrar" method="GET">
+                    <input type="hidden" name="categoria" value="plantillas">
+                    <button class="b-list">Plantillas</button>
+                  </form>
+                  <form action="/tienda/filtrar" method="GET">
+                    <input type="hidden" name="categoria" value="alertas">
+                    <button class="b-list">Alertas</button>
+                  </form>
+                  <form action="/tienda/filtrar" method="GET">
+                    <input type="hidden" name="categoria" value="emoticones">
+                    <button class="b-list">Emoticones</button>
+                  </form>
+                  <form action="/tienda/filtrar" method="GET">
+                    <input type="hidden" name="categoria" value="animaciones">
+                    <button class="b-list">Animaciones</button>
+                  </form>
+                  <form action="/tienda/filtrar" method="GET">
+                    <input type="hidden" name="categoria" value="paneles">
+                    <button class="b-list">Paneles</button>
+                  </form>
                 </ul>
               </div>
             
@@ -52,9 +84,22 @@
                 <div class="dropdown">
                     <button class="dropbtn">PRECIO</button>
                     <div class="dropdown-content">
-                      <a href="#">Inferior a B./10</a>
-                      <a href="#">Inferior a B./20</a>
-                      <a href="#">Inferior a B./30</a>
+                      <form action="/tienda/precio" method="GET">
+                        <input type="hidden" name="precio" value="9.99">
+                        <button class="b-list">Inferior a $9.99</button>
+                      </form>
+                      <form action="/tienda/precio" method="GET">
+                        <input type="hidden" name="precio" value="19.99">
+                        <button class="b-list">Inferior a $19.99</button>
+                      </form>
+                      <form action="/tienda/precio" method="GET">
+                        <input type="hidden" name="precio" value="29.99">
+                        <button class="b-list">Inferior a $29.99</button>
+                      </form>
+                      <form action="/tienda/precio" method="GET">
+                        <input type="hidden" name="precio" value="49.99">
+                        <button class="b-list">Inferior a $49.99</button>
+                      </form>
                     </div>
                   </div>
                   
@@ -62,6 +107,19 @@
 
         </div>
     </div>
+    <div class="break"></div>
+
+    <!--Display the links to the pages-->
+    <% if(page > 1) { %> <a href="/tienda/?page=<%=page-1%>">Anterior</a> <% } %>
+    <% for(let i = iterator; i <= endingLink; i++) { %>
+        <% if(i === page) { %>
+        <a class="selectedLink" href="//tienda/?page=<%=i%>"><%=i%></a>
+        <% continue; %>
+        <% } %>
+        <a href="/tienda/?page=<%=i%>"><%=i%></a>
+        <% } %>
+        <% if(page < numberOfPages) { %> <a href="/tienda/?page=<%=page+1%>">Siguiente</a> 
+        <% } %>
 </section>
 
 

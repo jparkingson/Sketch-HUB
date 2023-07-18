@@ -517,7 +517,7 @@ margin-bottom: 2rem;
 th, td{
     background-color: lightgray;
     padding: 10px;
-    font-size: 30px;
+    font-size: 25px;
     font-family: 'Bebas Neue', sans-serif;
 }
 
@@ -624,7 +624,22 @@ th, td{
     background-color: #555;
   }
   
+  a{
+    margin-right: 15px;
+    color: blue;
+}
 
+.selectedLink{
+    color: red;
+}
+
+.break{
+    margin: 50px 0;
+}
+
+a:link,a:visited,a:hover,a:active{
+    text-decoration: none;
+}
 
 
 /*SECCION FOOTER*/

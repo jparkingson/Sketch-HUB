@@ -11,13 +11,12 @@
 <!-- carrito.ejs -->
 <table class="table tabla-carrito">
   <thead>
-    <% if (!productos || productos.length == 0) { %>
-      <tr>
-        <td colspan="3" class="text-center">No hay productos en el carrito</td>
-      </tr>
-      <% } else { %>
    
-
+   <% 
+    if (productos.length > 0) {
+      let total = 0;
+      productos.forEach(item => {
+    %>
     <tr>
       <th>Producto</th>
       <th></th>
@@ -27,38 +26,62 @@
     </tr>
   </thead>
   <tbody>
-
-    <% productos.forEach((producto) => { %>
-      
-
     <tr>
       <td>
-        <img class="productCarrito-img" src="<%= producto.imgenURL %>" alt="<%= producto.nombre %>">
+        <img class="productCarrito-img" src="/productos/img/<%= item.imagenURL %>" alt="<%= item.nombre %>">
       </td>
       <td>
-        <%= producto.nombreProducto %>
+        <%= item.nombreProducto %>
       </td>
       <td>
-        <h2 class="product-title"><%= producto.descripcion %></h2>
+        <h2 class="product-title"><%= item.descripcion %></h2>
       </td>
       <td>
-        <p class="price"><%= producto.precio %></p>
+        <p class="price">$ <%= item.precio %></p>
       </td>
       <td>
-        <form action="/carrito/eliminar" method="POST">
-          <input type="hidden" name="productoId" value="<%= producto.idProducto %>">
+        <form action="/carrito/eliminar" method="GET">
+          <input type="hidden" name="productoId" value="<%= item.idProducto %>">
           <button type="submit" class="btn btn-danger">Eliminar</button>
         </form>
+         
+      
+        
+
+        
       </td>
     </tr>
-    <% }); %>
+    
+    <% 
+      total += parseFloat(item.precio);
+      });
+   %>
+
     <tr>
       <td colspan="2">Total</td>
-      <td></td>
+      <td> $<%= total.toFixed(2) %> </td>
     </tr>
+   
+    <% } else { %>
+      <tr>
+        <td colspan="5">No hay productos en el carrito</td>
+      </tr>
     <% } %>
+
   </tbody>
 </table>
+
+<script>
+
+function remove_item(item_id)
+{
+    if(confirm("Are you sure you want to remove it?"))
+    {
+        window.location.href = `/eliminar?id=${item_id}`;
+    }
+}
+
+</script>
 
   
         

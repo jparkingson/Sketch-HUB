@@ -5,7 +5,7 @@ const carritoController = require('../controllers/carritoController');
 // Agregar un producto al carrito
 router.post('/agregar', carritoController.agregarProducto);
 // Eliminar un producto del carrito
-router.delete('/eliminar', carritoController.eliminarProducto);
+router.get('/eliminar', carritoController.eliminarProducto);
 // Obtener el precio total del carrito
 router.get('/', carritoController.mostrarCarrito);
 
