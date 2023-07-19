@@ -8,13 +8,14 @@ const session = require('express-session');
 const app = express();
 
 app.use(session({
-  secret: 'sketch_hub',
+  secret: 'mysecret',
   resave: false,
   saveUninitialized: false
 }));
 
 // Agrega el código de registro.js aquí
 const mysql = require("mysql");
+const { render } = require('ejs');
 
 let conexion = mysql.createConnection({//cambiar los datos de la conexion
   host: "localhost",
@@ -22,8 +23,6 @@ let conexion = mysql.createConnection({//cambiar los datos de la conexion
   user: "root",
   password: ""
 });
-
-// Ruta para la página principal
 router.get('/', async (req, res) => {
   try {
     res.render('pages/index');
@@ -37,6 +36,24 @@ router.get('/', async (req, res) => {
 router.get('/tienda', async (req, res) => {
   try {
     res.render('pages/tienda');
+  } catch (error) {
+    console.error(error);
+    res.status(500).send('Error interno del servidor');
+  }
+});
+
+router.get('/editar-perfil', async (req, res) => {
+  try {
+    res.render('pages/editar-perfil');
+  } catch (error) {
+    console.error(error);
+    res.status(500).send('Error interno del servidor');
+  }
+});
+
+router.get('/perfil-logueado', async (req, res) => {
+  try {
+    res.render('pages/perfil-logueado');
   } catch (error) {
     console.error(error);
     res.status(500).send('Error interno del servidor');
@@ -64,7 +81,6 @@ router.get('/perfil', async (req, res) => {
 });
 
 // Ruta para la página de perfil de creador
-
 router.get('/perfil-creador', async (req, res) => {
   try {
       res.render('pages/perfil-creador'); // Aquí debes ajustar el nombre de tu archivo de vista (ejs)
@@ -73,11 +89,25 @@ router.get('/perfil-creador', async (req, res) => {
       res.status(500).send('Error interno del servidor');
   }
 });
+/*// Ruta para la página de perfil de creador
+router.get('/perfil-creador', (req, res) => {
+  // Verificar si el usuario ha iniciado sesión
+  if (req.session.tipouser) {
+    // Si el usuario ha iniciado sesión, renderizar la vista del perfil
+    res.render('pages/perfil-logueado');
+  } else {
+    // Si el usuario no ha iniciado sesión, renderizar la vista del formulario de login/registro
+    res.render('pages/perfil-creador');
+  }
+}); */
+
 // Ruta para la página de edición de perfil
 router.post('/perfil-creador/validar', (req, res) => {
   const datos = req.body;
 
   let usuarios = datos.reg_tipo_usuario; //cambiar en el input, si es usuario normal o diseñador
+
+  //console.log(usuarios);
   let nombre = datos.reg_name;
   let apellido = datos.reg_lastname;
   let correo = datos.reg_email;
@@ -90,10 +120,12 @@ router.post('/perfil-creador/validar', (req, res) => {
   let foto = req.file;
 
   let hashedPassword = SHA256(contras).toString();
-
-
+  
   let buscar = "SELECT * FROM usuario WHERE correo = '" + correo + "'";
   let registrar = "INSERT INTO usuario (idUsuario, nombre, apellido, correo, contrasena, telefono, direccion, ciudad, estado, codigoPostal, imgperfil) VALUES ('"+ usuarios +"','" + nombre + "','" + apellido + "','" + correo + "','" + hashedPassword + "','" + telefono + "','" + direccion + "','" + ciudad + "','" + estado + "','" + codigoPostal + "','" + foto + "')";
+
+  //---------------Para saber el tipo de usuario-----------------------------
+
 
   conexion.query(buscar, [correo], (error, rows) => {
     if (error) {
@@ -110,25 +142,31 @@ router.post('/perfil-creador/validar', (req, res) => {
             res.send('Ocurrió un error al insertar los datos');
           } else {
             console.log('Datos almacenados correctamente');
+
+            req.session.tipouser = usuarios;
+console.log('['+nombre, req.session.tipouser+']');
+
+            //req.session.loggedIn = true;
+
             res.redirect('/perfil-creador');
           }
         });
       }
     }
-  });
+  }); 
+  
 });
-
-
-// Agrega más rutas y código según tus necesidades
 
 //----------------- Ruta para validar el formulario de login-----------------------------
 router.post('/perfil-creador/login', (req, res) => {
   const info = req.body;
 
-  let correo = info.email;
-  let password = info.password;
+  const correo = info.email;
+  const password = info.password;
 
-  let buscar = "SELECT * FROM usuario WHERE correo = '" + correo + "'";
+  const buscar = "SELECT * FROM usuario WHERE correo = '" + correo + "'";
+
+  
 
   conexion.query(buscar, (error, rows) => {
     if (error) {
@@ -136,13 +174,24 @@ router.post('/perfil-creador/login', (req, res) => {
       res.send('Ocurrió un error en la consulta');
     } else {
       if (rows.length > 0) {
-        let usuario = rows[0]; // Tomar el primer registro encontrado
+        const usuario = rows[0]; // Tomar el primer registro encontrado
         // Hashear la contraseña ingresada por el usuario
         const hashedPasswordIngresada = SHA256(password).toString();
 
         if (usuario.contrasena === hashedPasswordIngresada) {
           console.log('Inicio de sesión exitoso');
-          res.redirect('/perfil-creador'); // Redirecciona al perfil del creador
+
+
+          const tipoUsuario = req.session.tipouser;
+
+          // Redireccionar según el tipo de usuario
+          if (tipoUsuario === 'Diseñador') {
+            res.redirect('/perfil-logueado'); // Redirecciona al perfil del diseñador, cambiar a lo de aaron
+            console.log(tipoUsuario);
+          } else if (tipoUsuario === 'Comprador') {
+            res.redirect('/perfil-creador'); // Redirecciona a la misma pagina, cambiar a perfil de usuario normal
+            console.log(tipoUsuario);
+          }
         } else {
           console.log('Contraseña incorrecta');
           res.send('Contraseña incorrecta');
@@ -155,6 +204,7 @@ router.post('/perfil-creador/login', (req, res) => {
   });
 });
 
+
 //--------------------------olvide mi contraseña------------------------
 router.get('/olvide', async (req, res) => {
   try {
@@ -166,13 +216,15 @@ router.get('/olvide', async (req, res) => {
 });
 
 //--------------------------logout------------------------
-router.get('/logout', function (req, res) {
-  req.session.destroy(function (err) {
-    if (err) {
-      console.error(err);
+router.get('/logout', (req, res) => {
+  // Destruye la sesión para desloguear al usuario
+  req.session.destroy((error) => {
+    if (error) {
+      console.error(error);
+      res.status(500).send('Error al cerrar sesión');
+    } else {
+      res.redirect('/login'); // Redirige a la página de inicio de sesión
     }
-    res.redirect('/login');
   });
 });
-
 module.exports = router;

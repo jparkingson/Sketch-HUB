@@ -1,42 +1,58 @@
 const path = require('path');
 const express = require('express');
-const app = express();
+const session = require('express-session');
 const morgan = require('morgan');
-const mongoose = require('mongoose');
-const mysql = require("mysql");
 const bodyParser = require('body-parser');
 
-// Configurar la aplicación
+const app = express();
+
+// Configurar sesión
+app.use(session({
+  secret: 'mysecret',
+  resave: false,
+  saveUninitialized: false
+}));
+
+
+// Configurar body-parser
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
-// Configurar body-parser
 
-//Configuración
-app.set('port',process.env.PORT || 3000);
-app.set('views', path.join(__dirname, 'views')); //Carpeta de las vistas
-app.set('view engine', 'ejs'); // Motor de plantilla
+
+
+// Configuración de vistas y motor de plantilla
+app.set('views', path.join(__dirname, 'views'));
+app.set('view engine', 'ejs');
 
 // Importar rutas
 const indexRoutes = require('./routes/index');
 
-// rutas
+// Rutas
 app.use('/', indexRoutes);
 
-app.use(express.static(path.join(__dirname,'../public')));
+// Directorios estáticos
+app.use(express.static(path.join(__dirname, '../public')));
+app.use(express.static(path.join(__dirname, '../node_modules')));
 
-app.use(express.static(path.join(__dirname,'../node_modules')));
-/*app.get('/', (req, res) => res.send('¡Hola Mundo!'));*/
+// Middlewares
+app.use(morgan('dev'));
+app.use(express.urlencoded({ extended: false }));
 
-
-// middlewares
-app.use(morgan('dev')); // Con morgan podemos ver los procesos en la vista de la consola.
-app.use(express.urlencoded({extended: false})) //Para interpretar los datos que vienen de un formulario y poder procesarlo
+// Inicialización del servidor
+app.set('port', process.env.PORT || 3000);
+app.listen(app.get('port'), () => {
+  console.log(`Server running on port ${app.get('port')}`);
+});
 
 /*
-const registerRouter = require('./registro');
-app.use('/register', registerRouter);*/
 
-//Inicialización del servidor
-app.listen(app.get('port'), () => {
-    console.log(`server on port ${app.get('port')}`);
-  });
+app.use('/perfil-creador', (req, res, next) => {
+  // Verificar si el usuario ha iniciado sesión
+  if (req.session.tipouser) {
+    // Si ha iniciado sesión, continuar con la siguiente ruta
+    next();
+  } else {
+    // Si no ha iniciado sesión, redirigir al usuario a la página de inicio de sesión
+    res.redirect('/perfil-creador');
+  }
+});*/
