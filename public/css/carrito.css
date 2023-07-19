@@ -226,3 +226,7 @@ header.sticky .btn-buy:hover{
     font-weight: bold;
   }
   
+.Checkout_button{
+    display: flex;
+    justify-content: center;
+}
