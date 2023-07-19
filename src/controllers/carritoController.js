@@ -1,35 +1,26 @@
 const db = require('../../db/db');
-/*
+
 exports.agregarProducto = (req, res) => {
-  const productId = req.body.id;
+   const productId = req.body.idProducto;
   const query = 'SELECT * FROM producto WHERE idProducto = ?';
-  
   db.query(query, productId, (error, results) => {
     if (error) {
       throw error;
     }
-
     if (results.length === 0) {
       res.status(404).send('Producto no encontrado');
     } else {
       if (!req.session.cart) {
         req.session.cart = [];
       }
-
-      // Verificar si el producto ya está en el carrito
-      const existingProduct = req.session.cart.find(product => product.idProducto === results[0].idProducto);
-      if (existingProduct) {
-        // El producto ya está en el carrito, puedes manejarlo como desees
-        console.log('El producto ya está en el carrito');
-      } else {
-        // El producto no está en el carrito, agregarlo
-        req.session.cart.push(results[0]);
-        res.redirect('/');
-      }
+      req.session.cart.push(results[0]);
+      res.redirect('/carrito');
     }
   });
 };
- */
+
+
+/*
 exports.agregarProducto = (req, res) => {
   const productId = req.body.idProducto;
   const imagen = req.body.imagenURL;
@@ -58,7 +49,7 @@ exports.agregarProducto = (req, res) => {
   }
   res.redirect('/carrito');
 };
-
+*/
   
 // Eliminar un producto del carrito
 exports.eliminarProducto = (req, res) => {
@@ -75,6 +66,8 @@ exports.eliminarProducto = (req, res) => {
   res.redirect('/carrito');
 };
 
+
+/*
 exports.eliminarProducto = (request, response) => {
 
 	const product_id = request.query.id;
@@ -91,7 +84,7 @@ exports.eliminarProducto = (request, response) => {
 
 };
 
-
+*/
 
 
 
