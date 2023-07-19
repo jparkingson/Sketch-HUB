@@ -19,10 +19,8 @@
     %>
     <tr>
       <th>Producto</th>
-      <th></th>
       <th>Descripcion</th>
       <th>Precio</th>
-      <th>Acciones</th>
     </tr>
   </thead>
   <tbody>
@@ -60,9 +58,7 @@
       <td colspan="2">Total</td>
       <td> $<%= total.toFixed(2) %> </td>
     </tr>
-    <form action="/paypal/pay" method="POST">
-      <input type="submit" class="btn btn-primary mt-4" value="Pagar con PayPal">
-    </form>
+    
     <% } else { %>
       <tr>
         <td colspan="5">No hay productos en el carrito</td>
@@ -70,8 +66,13 @@
     <% } %>
 
   </tbody>
-
 </table>
+<div class="Checkout_button">
+  <form action="/paypal/pay" method="POST">
+    <input type="hidden" name="total">
+    <button type="submit">Checkout</button>
+  </form>
+</div>
 
 <script>
 
