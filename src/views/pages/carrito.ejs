@@ -27,9 +27,8 @@
   </thead>
   <tbody>
     <tr>
-      <td>
-        <img class="productCarrito-img" src="/productos/img/<%= item.imagenURL %>" alt="<%= item.nombre %>">
-      </td>
+    
+  
       <td>
         <%= item.nombreProducto %>
       </td>
@@ -61,7 +60,9 @@
       <td colspan="2">Total</td>
       <td> $<%= total.toFixed(2) %> </td>
     </tr>
-   
+    <form action="/paypal/pay" method="POST">
+      <input type="submit" class="btn btn-primary mt-4" value="Pagar con PayPal">
+    </form>
     <% } else { %>
       <tr>
         <td colspan="5">No hay productos en el carrito</td>
@@ -69,6 +70,7 @@
     <% } %>
 
   </tbody>
+
 </table>
 
 <script>

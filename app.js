@@ -32,13 +32,16 @@ app.use(session({
 const indexRoutes = require('./src/routes/index');
 const carritoRoutes = require('./src/routes/carrito');
 const tiendaRoutes = require('./src/routes/tienda');
+const perfilRoutes = require('./src/routes/perfil');
+const paypalRoutes = require('./src/routes/paypal');
 
 app.use(cartMiddleware);
 // rutas
 app.use('/', indexRoutes);
-//app.use('/productos', productosRoutes);
 app.use('/carrito', carritoRoutes);
 app.use('/tienda', tiendaRoutes);
+app.use('/perfil', perfilRoutes);
+app.use('/paypal', paypalRoutes);
 
 app.use(express.static(path.join(__dirname,'/public')));
 app.use(express.static(path.join(__dirname,'/node_modules')));
