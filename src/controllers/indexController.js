@@ -19,9 +19,7 @@ exports.mostrarIndex = (req, res) => {
   });
 };
 
-  exports.mostrarDiseñadores = (req, res) => {
-    res.render('pages/creadores');
-  };
+
 
   
 

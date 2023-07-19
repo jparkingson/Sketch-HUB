@@ -22,7 +22,7 @@ exports.mostrarTienda = (req, res) => {
   db.query(sql, (err, result) => {
       if(err) throw err;
       const numOfResults = result.length;
-      const resultsPerPage = 3; // Número de productos que se mostrarán por página
+      const resultsPerPage = 6; // Número de productos que se mostrarán por página
       const numberOfPages = Math.ceil(numOfResults / resultsPerPage);
       let page = req.query.page ? Number(req.query.page) : 1;
 
@@ -41,7 +41,7 @@ exports.mostrarTienda = (req, res) => {
       db.query(sql, (err, result)=>{
           if(err) throw err;
        
-          let iterator = Math.max(1, page - 1);
+          let iterator = Math.max(1, page - 10);
           let endingLink = Math.min(iterator + 9, numberOfPages);
           if (endingLink < (page + 1)) {
             iterator -= (page + 1) - endingLink;

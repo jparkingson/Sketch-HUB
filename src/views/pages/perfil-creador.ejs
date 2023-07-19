@@ -7,8 +7,8 @@
     <div class="perfil-content">
         <h1>Perfil</h2>
             <hr>
-            <img class="usuario-img" src="/img/usuario.png" alt="Usuario">
-            <h2>Diseñador <i class="fa-solid fa-check"></i></h2>
+            <img class="perfil-img" src="/img/usuario.png" alt="Usuario">
+            <h2> <%= user.nombre  %> <%= user.apellido %></h2>
             <div class="btn-box">
                 <a href="/editar-perfil" class="btn">Editar Perfil</a>
             </div>
@@ -71,23 +71,12 @@
      </form>
  </div>
 
-
 </section> 
 <section class="bodylog1">  
  <div id="registro" class="register">
      <h2>Registrate!</h2>
 
      <form action="/perfil/validar" class="form2" method="post" >	
-
-
-         <p>
-             <label class="text1" for="tipo-usuario">Tipo de usuario &nbsp;<span class="required">*</span></label>
-             <select id="tipo-usuario" name="reg_tipo_usuario" class="styled-select">
-                 <option value="Diseñador">Diseñador</option>
-                 <option value="Comprador">Comprador</option>
-             </select>
-         </p>
-
          <p>
              <label class="text" for="reg_username">Nombre&nbsp;<span class="required">*</span></label>
              <input type="text" class="user" name="reg_name" id="reg_name" autocomplete="name" value="" required/>				

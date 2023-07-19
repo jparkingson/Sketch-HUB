@@ -5,7 +5,7 @@ const indexController = require('../controllers/indexController');
 // Ruta para la página principal
 
 router.get('/', indexController.mostrarIndex);
-router.get('/creadores', indexController.mostrarDiseñadores);
+
 router.get('/editar-perfil', indexController.mostrarEditarPerfil);
 router.get('/checkout', indexController.mostrarCheckout);
 

@@ -15,11 +15,11 @@ exports.mostrarPerfilCreador = (req, res) => {
     res.render('pages/perfil-creador', { user: null });
   }
   };
-
+/*
 exports.registro = (req, res) => {
     const datos = req.body;
   
-    let usuarios = datos.reg_tipo_usuario; //cambiar en el input, si es usuario normal o diseñador
+
     let nombre = datos.reg_name;
     let apellido = datos.reg_lastname;
     let correo = datos.reg_email;
@@ -35,7 +35,7 @@ exports.registro = (req, res) => {
   
   
     let buscar = "SELECT * FROM usuario WHERE correo = '" + correo + "'";
-    let registrar = "INSERT INTO usuario (idUsuario, nombre, apellido, correo, contrasena, telefono, direccion, ciudad, estado, codigoPostal, imgperfil) VALUES ('"+ usuarios +"','" + nombre + "','" + apellido + "','" + correo + "','" + hashedPassword + "','" + telefono + "','" + direccion + "','" + ciudad + "','" + estado + "','" + codigoPostal + "','" + foto + "')";
+    let registrar = "INSERT INTO usuario (nombre, apellido, correo, contrasena, telefono, direccion, ciudad, estado, codigoPostal, imgperfil) VALUES ('" + nombre + "','" + apellido + "','" + correo + "','" + hashedPassword + "','" + telefono + "','" + direccion + "','" + ciudad + "','" + estado + "','" + codigoPostal + "','" + foto + "')";
   
     db.query(buscar, [correo], (error, rows) => {
       if (error) {
@@ -46,20 +46,73 @@ exports.registro = (req, res) => {
           console.log('Ya existe ese correo');
           res.send('Ya existe ese correo');
         } else {
-          conexion.query(registrar, (error) => {
+          db.query(registrar, (error) => {
             if (error) {
               console.error(error);
               res.send('Ocurrió un error al insertar los datos');
             } else {
               console.log('Datos almacenados correctamente');
-              res.redirect('pages/perfil-creador');
+              res.redirect('/perfil');
             }
           });
         }
       }
     });
   };
+*/
 
+
+
+exports.registro = (req, res) => {
+  const datos = req.body;
+
+  let nombre = datos.reg_name;
+  let apellido = datos.reg_lastname;
+  let correo = datos.reg_email;
+  let contras = datos.reg_password;
+  let telefono = datos.reg_phone;
+  let direccion = datos.reg_direccion;
+  let ciudad = datos.reg_city;
+  let estado = datos.reg_estado;
+  let codigoPostal = datos.reg_postal;
+  let foto = req.file;
+
+  let hashedPassword = SHA256(contras).toString();
+
+  let buscar = "SELECT * FROM usuario WHERE correo = ?";
+  let registrar = "INSERT INTO usuario (nombre, apellido, correo, contrasena, telefono, direccion, ciudad, estado, codigoPostal, imgperfil) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+
+  db.query(buscar, [correo], (error, rows) => {
+    if (error) {
+      console.error(error);
+      res.send('Ocurrió un error en la consulta');
+    } else {
+      if (rows.length > 0) {
+        console.log('Ya existe ese correo');
+        res.send('Ya existe ese correo');
+      } else {
+        db.query(registrar, [nombre, apellido, correo, hashedPassword, telefono, direccion, ciudad, estado, codigoPostal, foto], (error) => {
+          if (error) {
+            console.error(error);
+            res.send('Ocurrió un error al insertar los datos');
+          } else {
+            // Iniciar sesión después del registro
+            req.session.user = {
+              nombre,
+              apellido,
+              correo
+            };
+
+            console.log('Datos almacenados correctamente');
+            res.redirect('/perfil');
+          }
+        });
+      }
+    }
+  });
+};
+
+/*
 exports.login = (req, res) => {
     const info = req.body;
   
@@ -68,7 +121,7 @@ exports.login = (req, res) => {
   
     let buscar = "SELECT * FROM usuario WHERE correo = '" + correo + "'";
   
-    conexion.query(buscar, (error, rows) => {
+    db.query(buscar, (error, rows) => {
       if (error) {
         console.error(error);
         res.send('Ocurrió un error en la consulta');
@@ -92,7 +145,52 @@ exports.login = (req, res) => {
       }
     });
   };
+  */
+
+
+
+  exports.login = (req, res) => {
+    const info = req.body;
   
+    let correo = info.email;
+    let password = info.password;
+  
+    let buscar = "SELECT * FROM usuario WHERE correo = ?";
+  
+    db.query(buscar, [correo], (error, rows) => {
+      if (error) {
+        console.error(error);
+        res.send('Ocurrió un error en la consulta');
+      } else {
+        if (rows.length > 0) {
+          let usuario = rows[0]; // Tomar el primer registro encontrado
+          // Hashear la contraseña ingresada por el usuario
+          const hashedPasswordIngresada = SHA256(password).toString();
+  
+          if (usuario.contrasena === hashedPasswordIngresada) {
+            // Guardar la información de sesión del usuario
+            req.session.user = {
+              idUsuario: usuario.idUsuario,
+              correo: usuario.correo,
+              nombre: usuario.nombre,
+              apellido: usuario.apellido
+            };
+  
+            console.log('Inicio de sesión exitoso');
+            res.redirect('/perfil'); // Redirecciona al perfil del creador
+          } else {
+            console.log('Contraseña incorrecta');
+            res.send('Contraseña incorrecta');
+          }
+        } else {
+          console.log('Correo electrónico no encontrado');
+          res.send('Correo electrónico no encontrado');
+        }
+      }
+    });
+  };
+  
+
   //--------------------------olvide mi contraseña------------------------
 exports.olvideContra = async (req, res) => {
     try {

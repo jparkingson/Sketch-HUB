@@ -27,21 +27,25 @@ app.use(session({
   cookie: { secure: false } // cambiar a true si estás en un entorno https
  }));
 
-
+ app.use(cartMiddleware);
 // Importar rutas
 const indexRoutes = require('./src/routes/index');
 const carritoRoutes = require('./src/routes/carrito');
 const tiendaRoutes = require('./src/routes/tienda');
 const perfilRoutes = require('./src/routes/perfil');
 const paypalRoutes = require('./src/routes/paypal');
+const historialRoutes = require('./src/routes/historial')
+const disenadorRoutes = require('./src/routes/disenador');
 
-app.use(cartMiddleware);
+
 // rutas
 app.use('/', indexRoutes);
 app.use('/carrito', carritoRoutes);
 app.use('/tienda', tiendaRoutes);
 app.use('/perfil', perfilRoutes);
 app.use('/paypal', paypalRoutes);
+app.use('./historial', historialRoutes);
+app.use('/disenador', disenadorRoutes);
 
 app.use(express.static(path.join(__dirname,'/public')));
 app.use(express.static(path.join(__dirname,'/node_modules')));

@@ -8,13 +8,20 @@
     <title>Transacción Realizada</title>
 </head>
 <body>
-    <div class="container">
-        <h1 class="mt-4">Transacción Realizada</h1>
-        <p>¡La transacción se ha completado con éxito!</p>
-        <a href="/" class="btn btn-primary">Volver a la página principal</a>
-    
+    <div class="card-header m">
+        <%- include('../sections/header'); %>
+    </div>
+   
+    <div class="container  d-flex flex-column" style="margin-top: 15%; margin-bottom: 15%;">
+        <h1 class=" text-center" style="size: 35px;">Transacción Realizada</h1>
+        <p class="text-center " style="size: 20px;">¡La transacción se ha completado con éxito!</p>
+        <a href="/index" class="d-flex justify-content-center"><button >Historial de Compras</button></a>
     </div>
     <!-- Agregar el script JS de Bootstrap -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.0/dist/js/bootstrap.min.js"></script>
 </body>
+<div class="card-footer">
+    <%- include('../sections/footer'); %>
+</div>
+
 </html>

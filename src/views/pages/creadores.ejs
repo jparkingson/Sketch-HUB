@@ -1,56 +1,94 @@
 <%- include('../sections/header'); %>
 
+<section class="users-content">
 
-<section class="users">
-    <div class="users-content">
-        <h1>Diseñadores</h2>
-            <h3>Observa los diseñadores encargados de toda la magia de nuestra plataforma!</h3>
-          <hr>
-    </div>
-    <div class="">
-        
-        <div class="container">
-            
-            <!--1-->
-        <div class="user">
-                <img class="user-img" src="/img/usuario.png" alt="Liquid Color Banner">
-                <h2 class="user-title">DISEÑADOR <i class="fa-solid fa-check"></i></h2>
-                <a href="/perfil-creador"><button class="ver-perfil" >Ver perfil</button></a> 
-            </div>
-            <!--2-->
-            <div class="user">
-                <img class="user-img" src="/img/usuario.png" alt="Liquid Color Banner">
-                <h2 class="user-title">DISEÑADOR <i class="fa-solid fa-check"></i></h2>
-                <a href="/perfil-creador"><button class="ver-perfil" >Ver perfil</button></a> 
-            </div>
+  <div class="container">
+    <h1>Diseñadores</h1>
+    <h3>Observa los diseñadores encargados de toda la magia de nuestra plataforma!</h3>
+    <hr>
+    <% diseñadores.forEach((diseñador) => { %>
+      <div class="user" id="user-<%= diseñador.idDisenador %>">
+      
+        <img class="user-img" src="/img/usuario.png" alt="Liquid Color Banner">
+        <h2 class="user-title"><%= diseñador.nombre %> <i class="fa-solid fa-check"></i></h2>
+        <a href="#" class="ver-perfil" data-id="<%= diseñador.idDisenador %>">Ver perfil</a>
+      </div>
 
-            <div class="user">
-                <img class="user-img" src="/img/usuario.png" alt="Liquid Color Banner">
-                <h2 class="user-title">DISEÑADOR <i class="fa-solid fa-check"></i></h2>
-                <a href="/perfil-creador"><button class="ver-perfil" >Ver perfil</button></a> 
-            </div>
-
-            <div class="user">
-                <img class="user-img" src="/img/usuario.png" alt="Liquid Color Banner">
-                <h2 class="user-title">DISEÑADOR <i class="fa-solid fa-check"></i></h2>
-                <a href="/perfil-creador"><button class="ver-perfil" >Ver perfil</button></a> 
-            </div>
-
-            <div class="user">
-                <img class="user-img" src="/img/usuario.png" alt="Liquid Color Banner">
-                <h2 class="user-title">DISEÑADOR <i class="fa-solid fa-check"></i></h2>
-                <a href="/perfil-creador"><button class="ver-perfil" >Ver perfil</button></a> 
-            </div>
-
-            <div class="user">
-                <img class="user-img" src="/img/usuario.png" alt="Liquid Color Banner">
-                <h2 class="user-title">DISEÑADOR <i class="fa-solid fa-check"></i></h2>
-                <a href="/perfil-creador"><button class="ver-perfil" >Ver perfil</button></a> 
-            </div>
-           
-        </div>
-    </div>
+      <!-- Create a separate profile container for each designer -->
+      <div class="perfil-diseñador" id="perfil-<%= diseñador.idDisenador %>" style="display: none;">
     
+        <div class="perfil-content">
+            <h1>Diseñador</h2>
+                <hr>
+                <img class="perfil-img" src="/img/usuario.png" alt="Usuario">
+                <h2> <%= diseñador.nombre  %> <%= diseñador.apellido %> <i class="fa-solid fa-check"></i></h2>
+               
+                <hr>
+        </div>
+        <h2>Portafolio personal</h2>
+        <div class="diseñador-container">
+           
+            <div class="product">
+                <img class="product-img" src="/img/producto1.jpg" alt="Liquid Color Banner">
+                <h2 class="product-title">LIQUIDCOLOR BANNER</h2>
+       
+       
+            </div>
+       
+       
+       
+       
+        </div>
+
+
+        <a href="#" class="volver">Volver a la lista de diseñadores</a>
+      </div>
+
+    <% }); %>
+  </div>
 </section>
+<hr>
 
 <%- include('../sections/footer'); %>
+
+<script>
+  const userContainers = document.querySelectorAll('.user');
+  const perfilContainers = document.querySelectorAll('.perfil-diseñador');
+  const verPerfilLinks = document.querySelectorAll('.ver-perfil');
+  const volverLinks = document.querySelectorAll('.volver');
+
+  verPerfilLinks.forEach((link) => {
+    link.addEventListener('click', (event) => {
+      event.preventDefault();
+      const diseñadorId = link.getAttribute('data-id');
+      mostrarPerfil(diseñadorId);
+    });
+  });
+
+  volverLinks.forEach((link) => {
+    link.addEventListener('click', (event) => {
+      event.preventDefault();
+      mostrarListaDiseñadores();
+    });
+  });
+
+  function mostrarPerfil(diseñadorId) {
+    userContainers.forEach((userContainer) => {
+      userContainer.style.display = 'none';
+    });
+
+    // Display only the selected profile container
+    const perfilContainer = document.querySelector(`#perfil-${diseñadorId}`);
+    perfilContainer.style.display = 'block';
+  }
+
+  function mostrarListaDiseñadores() {
+    userContainers.forEach((userContainer) => {
+      userContainer.style.display = 'block';
+    });
+
+    perfilContainers.forEach((perfilContainer) => {
+      perfilContainer.style.display = 'none';
+    });
+  }
+</script>

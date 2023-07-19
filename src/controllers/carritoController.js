@@ -14,7 +14,7 @@ exports.agregarProducto = (req, res) => {
         req.session.cart = [];
       }
       req.session.cart.push(results[0]);
-      res.redirect('/carrito');
+      res.redirect('/');
     }
   });
 };
@@ -50,7 +50,7 @@ exports.agregarProducto = (req, res) => {
   res.redirect('/carrito');
 };
 */
-  
+  /*
 // Eliminar un producto del carrito
 exports.eliminarProducto = (req, res) => {
   const productId = req.params.id;
@@ -65,6 +65,23 @@ exports.eliminarProducto = (req, res) => {
 
   res.redirect('/carrito');
 };
+*/
+// Eliminar un producto del carrito
+exports.eliminarProducto = (req, res) => {
+  const productId = req.query.productId;
+
+  // Encuentra el índice del producto en el carrito
+  const index = req.session.cart.findIndex(item => productId === productId);
+
+  if (index !== -1) {
+    // Elimina el producto del carrito
+    req.session.cart.splice(index, 1);
+  }
+
+  res.redirect('/carrito');
+};
+
+
 
 
 /*
