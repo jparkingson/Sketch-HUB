@@ -2,6 +2,7 @@ const db = require('../../db/db');
 
 exports.agregarProducto = (req, res) => {
    const productId = req.body.idProducto;
+   
   const query = 'SELECT * FROM producto WHERE idProducto = ?';
   db.query(query, productId, (error, results) => {
     if (error) {
@@ -13,12 +14,49 @@ exports.agregarProducto = (req, res) => {
       if (!req.session.cart) {
         req.session.cart = [];
       }
-      req.session.cart.push(results[0]);
-      res.redirect('/');
+
+  // Verificar si el producto ya está en el carrito      
+  if (req.session.cart.some(item => item.productId === productId)) {
+    // Si el producto ya está en el carrito, puedes mostrar un mensaje o redireccionar al carrito directamente
+    res.redirect('/carrito'); // Por ejemplo, redirecciona al carrito
+  } else {
+    req.session.cart.push(results[0]);
+    res.redirect(req.headers.referer);
+  }
+
+      
+
     }
   });
 };
+/*
+exports.agregarProducto = (req, res) => {
+  const productId = req.body.idProducto;
+  const query = 'SELECT * FROM producto WHERE idProducto = ?';
+  db.query(query, productId, (error, results) => {
+    if (error) {
+      throw error;
+    }
+    if (results.length === 0) {
+      res.status(404).send('Producto no encontrado');
+    } else {
+      if (!req.session.cart) {
+        req.session.cart = [];
+      }
 
+      // Verificar si el producto ya está en el carrito
+      const isProductInCart = req.session.cart.some(item => item.idProducto === productId);
+      if (isProductInCart) {
+        // Si el producto ya está en el carrito, puedes mostrar un mensaje o redireccionar al carrito directamente
+        res.redirect('/carrito'); // Por ejemplo, redirecciona al carrito
+      } else {
+        req.session.cart.push(results[0]);
+        res.redirect('/');
+      }
+    }
+  });
+};
+*/
 
 /*
 exports.agregarProducto = (req, res) => {

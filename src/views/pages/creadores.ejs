@@ -21,30 +21,31 @@
             <h1>Diseñador</h2>
                 <hr>
                 <img class="perfil-img" src="/img/usuario.png" alt="Usuario">
-                <h2> <%= diseñador.nombre  %> <%= diseñador.apellido %> <i class="fa-solid fa-check"></i></h2>
+                <h2> <%= diseñador.idDisenador %> <%= diseñador.nombre  %> <%= diseñador.apellido %> <i class="fa-solid fa-check"></i></h2>
                
                 <hr>
         </div>
+       
         <h2>Portafolio personal</h2>
-        <div class="diseñador-container">
-           
-            <div class="product">
-                <img class="product-img" src="/img/producto1.jpg" alt="Liquid Color Banner">
-                <h2 class="product-title">LIQUIDCOLOR BANNER</h2>
-       
-       
-            </div>
-       
-       
-       
-       
-        </div>
+ <!-- Otras partes del código -->
+
+          <div class="diseñador-container">
+            <% diseñador.productos.forEach((producto) => { %>
+              <div class="product">
+                <img class="product-img" src="/productos/img/<%= producto.imagenURL %>" alt="<%= producto.nombreProducto %>">
+                <h2 class="product-title"><%= producto.nombreProducto %></h2>
+                <!-- Otras propiedades del producto, como descripción, precio, etc. -->
+              </div>
+            <% }); %>
+          </div>
+
+<!-- Otras partes del código -->
 
 
         <a href="#" class="volver">Volver a la lista de diseñadores</a>
       </div>
-
-    <% }); %>
+      <% }); %>
+  
   </div>
 </section>
 <hr>

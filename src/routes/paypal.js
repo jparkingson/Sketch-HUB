@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const paypal = require('paypal-rest-sdk');
-
+const db = require('../../db/db');
 
 
 
@@ -53,6 +53,7 @@ paypal.payment.create(create_payment_json, function (error, payment) {
           });
 
 //aqui
+/*
 router.get('/success', (req, res) => {
     const payerId = req.query.PayerID;
     const paymentId = req.query.paymentId;
@@ -66,6 +67,7 @@ router.get('/success', (req, res) => {
               
           }
       }]
+      
     };
   
   // Obtains the transaction details from paypal
@@ -80,7 +82,111 @@ router.get('/success', (req, res) => {
       }
   });
   });
+*/
+/*
+router.get('/success', (req, res) => {
+    const payerId = req.query.PayerID;
+    const paymentId = req.query.paymentId;
+    const userId = req.session.user.idUsuario; // Supongamos que la sesión contiene la información del usuario que ha iniciado sesión
 
+    const execute_payment_json = {
+        "payer_id": payerId,
+        "transactions": [{
+            "amount": {
+                "currency": "USD",
+                "total":  req.session.cart.reduce((a, b) => a + b.precio, 0).toString()   
+            }
+        }]
+    };
+
+    paypal.payment.execute(paymentId, execute_payment_json, function (error, payment) {
+        if (error) {
+            console.log(error.response);
+            throw error;
+        } else {
+            console.log(JSON.stringify(payment));
+         
+            
+
+            // Insertar cada producto del carrito como una compra individual en la base de datos usando el procedimiento almacenado ComprarProducto
+            req.session.cart.forEach((item) => {
+                const productId = item.idProducto;
+
+                const query = "CALL ComprarProducto(?, ?)";
+                db.query(query, [userId, productId], (error, result) => {
+                    if (error) {
+                        console.error(error);
+                    } else {
+                        req.session.cart = [];
+                        console.log(`Compra registrada en la base de datos para el producto con idProducto ${productId}`);
+                    }
+                });
+            });
+
+            // Después de registrar las compras en la base de datos, renderiza la vista de éxito
+            res.render('pages/success');
+        }
+    });
+});
+*/
+router.get('/success', async (req, res) => {
+    const payerId = req.query.PayerID;
+    const paymentId = req.query.paymentId;
+    const userId = req.session.user.idUsuario; // Supongamos que la sesión contiene la información del usuario que ha iniciado sesión
+  
+    const execute_payment_json = {
+      "payer_id": payerId,
+      "transactions": [{
+        "amount": {
+          "currency": "USD",
+          "total":  req.session.cart.reduce((a, b) => a + b.precio, 0).toString()   
+        }
+      }]
+    };
+  
+    try {
+      const payment = await new Promise((resolve, reject) => {
+        paypal.payment.execute(paymentId, execute_payment_json, function (error, payment) {
+          if (error) {
+            console.log(error.response);
+            reject(error);
+          } else {
+            console.log(JSON.stringify(payment));
+            resolve(payment);
+          }
+        });
+      });
+  
+      // Registrar las compras en la base de datos
+      for (const item of req.session.cart) {
+        const productId = item.idProducto;
+  
+        const query = "CALL ComprarProducto(?, ?)";
+        await new Promise((resolve, reject) => {
+          db.query(query, [userId, productId], (error, result) => {
+            if (error) {
+              console.error(error);
+              reject(error);
+            } else {
+              console.log(`Compra registrada en la base de datos para el producto con idProducto ${productId}`);
+              resolve(result);
+            }
+          });
+        });
+      }
+  
+      // Vaciar el carrito después de una compra exitosa
+      req.session.cart = [];
+  
+      // Después de registrar las compras en la base de datos y vaciar el carrito, renderiza la vista de éxito
+      res.render('pages/success');
+    } catch (error) {
+      // Manejar errores aquí
+      console.error(error);
+      res.status(500).send('Error interno del servidor');
+    }
+  });
+  
 router.get('/cancel', (req, res) => res.render('pages/cancel'));
 
 module.exports = router;

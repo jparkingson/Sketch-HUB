@@ -12,21 +12,24 @@
 <table class="table tabla-carrito">
   <thead>
    
-   <% 
-    if (productos.length > 0) {
-      let total = 0;
-      productos.forEach(item => {
-    %>
+
     <tr>
       <th>Producto</th>
+      <th> </th>
       <th>Descripcion</th>
       <th>Precio</th>
     </tr>
   </thead>
+  <% 
+  if (productos.length > 0) {
+    let total = 0;
+    productos.forEach(item => {
+  %>
   <tbody>
     <tr>
-    
-  
+      <td>
+        <img class="productCarrito-img" src="/productos/img/<%= item.imagenURL %>" alt="">
+
       <td>
         <%= item.nombreProducto %>
       </td>
@@ -34,18 +37,17 @@
         <h2 class="product-title"><%= item.descripcion %></h2>
       </td>
       <td>
-        <p class="price">$ <%= item.precio %></p>
+        <p class="price">$ <%= item.precio.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 }) %></p>
       </td>
       <td>
         <form action="/carrito/eliminar" method="GET">
           <input type="hidden" name="productoId" value="<%= item.idProducto %>">
-          <button type="submit" class="btn btn-danger">Eliminar</button>
+          <button type="submit" class="btn btn-danger"><i class="fa fa-trash" aria-hidden="true"></i>
+</button>
         </form>
          
       
-        
 
-        
       </td>
     </tr>
     
@@ -59,16 +61,8 @@
       <td> $<%= total.toFixed(2) %> </td>
     </tr>
     
-
-    <div class="Checkout_button">
-  <form action="/paypal/pay" method="POST">
-    <input type="hidden" name="total">
-    <button type="submit">Checkout</button>
-  </form>
-</div>
-
-
-    <% } else { %>
+   
+  <% } else { %>
       <tr>
         <td colspan="5">No hay productos en el carrito</td>
       </tr>
@@ -76,7 +70,20 @@
 
   </tbody>
 </table>
+<% if (user) {  %>
+          <div class="Checkout_button">
+        <form action="/paypal/pay" method="POST">
+          <input type="hidden" name="total">
+          <button type="submit">Checkout</button>
+        </form>
+      </div>
+    <% } else { %>
+      <div class="Checkout_button">
+        <a href="/perfil" class="btn"> <h1>Inicia sesión para comprar</h1></a>
+      
+      </div>
 
+    <% } %>
 
 <script>
 

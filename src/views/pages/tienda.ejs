@@ -17,18 +17,29 @@
                 <%= producto.descripcion %>
               </div>
                 <h2 class="product-title"><%= producto.nombreProducto %></h2>
-                <p class="price">$<%= producto.precio %></p>
+                <p class="price">$ <%= producto.precio.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 }) %></p>
                   <!-- Add a div to show the product description on hover -->
             
                 <p class="price"><%= producto.categoria  %></p>
+                  <!--
+    
+                -->
                 <form action="/carrito/agregar" method="post">
-                    <input type="hidden" name="idProducto" value="<%= producto.idProducto %>">
-                    <input type="hidden" name="imagenURL" value=" <%= producto.imagenURL  %> ">
-                    <input type="hidden" name="nombreProducto" value=" <%= producto.nombreProducto  %> ">
-                    <input type="hidden" name="descripcion" value=" <%= producto.descripcion  %> ">
-                    <input type="hidden" name="precio" value=" <%= producto.precio %>">
-                    <button class="add-to-cart" data-max-quantity="1" data-product-id="special-product">Añadir al carrito</button>
+  
+                  <input type="hidden" name="idProducto" value="<%= producto.idProducto %>">
+                  <input type="hidden" name="imagenURL" value=" <%= producto.imagenURL  %> ">
+                  <input type="hidden" name="nombreProducto" value=" <%= producto.nombreProducto  %> ">
+                  <input type="hidden" name="descripcion" value=" <%= producto.descripcion  %> ">
+                  <input type="hidden" name="precio" value=" <%= producto.precio %>">
+             
+                  <button class="add-to-cart" 
+                    data-max-quantity="1" data-product-id="special-product">Añadir al carrito</button>
+              
+              
                 </form>
+                
+                
+
             </div>
             <% }); %>
            <hr>
@@ -126,7 +137,25 @@
         <% if(page < numberOfPages) { %> <a href="/tienda/?page=<%=page+1%>">Siguiente</a> 
         <% } %>
 </section>
+<!-- 
 <script>
+  const productContainers = document.querySelectorAll('.product');
+
+  productContainers.forEach((productContainer) => {
+    const description = productContainer.querySelector('.product-description');
+
+    productContainer.addEventListener('mouseenter', () => {
+      description.style.display = 'block';
+    });
+
+    productContainer.addEventListener('mouseleave', () => {
+      description.style.display = 'none';
+    });
+  });
+</script>
+-->
+<script>
+    // Realizar una solicitud AJAX para agregar el producto al carrito
   const productContainers = document.querySelectorAll('.product');
 
   productContainers.forEach((productContainer) => {

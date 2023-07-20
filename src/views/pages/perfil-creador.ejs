@@ -3,33 +3,117 @@
 
 <% if (user) { %>
 
+<script type="text/javascript" src="js/cargar-etiquetas.js"></script> 
+
+
 <section class="perfil">
+
     <div class="perfil-content">
         <h1>Perfil</h2>
             <hr>
             <img class="perfil-img" src="/img/usuario.png" alt="Usuario">
-            <h2> <%= user.nombre  %> <%= user.apellido %></h2>
+            <h2> <%= user.nombre  %> <%= user.apellido %> <%= user.tipo %></h2>
+            <div class="etiquetas-container"></div>
             <div class="btn-box">
                 <a href="/editar-perfil" class="btn">Editar Perfil</a>
             </div>
             <hr>
     </div>
+
+    <% if (user.tipo === 'diseñador'){  %>
+
+    <div class="btn-box">
+        <a href="/cargar-diseno" class="btn">Cargar diseño</a>
+    </div>
+
     <h2>Portafolio personal</h2>
     <div class="diseñador-container">
-       
+       <% productos.forEach(producto => { %>
         <div class="product">
-            <img class="product-img" src="/img/producto1.jpg" alt="Liquid Color Banner">
-            <h2 class="product-title">LIQUIDCOLOR BANNER</h2>
-   
-   
+            <img class="product-img" src="/productos/img/<%= producto.imagenURL %>" alt="Liquid Color Banner">
+            <h2 class="product-title"> <%= producto.nombreProducto %> </h2>
         </div>
-   
-   
-   
-   
+        <% }); %>
     </div>
+
+
+
+    <h1>Tus Compras</h2>
+       
+        <table class="table tabla-carrito">
+            <thead>
+                    <tr>
+                        <th>Producto</th>
+                        <th>Precio de Compra</th>
+                        <th>Fecha de Compra</th>
+                        <th>Descarga</th>
+                    </tr>
+            </thead>
+            <% compras.forEach(compra => {  %>
+            <tbody>
+               
+                    <td> <%= compra.nombreProducto %> </td>
+                    <td> $ <%= compra.precioCompra.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 }) %> %>  </td>
+                    <td> <%= compra.fechaCompra %> </td>
+                    <td> 
+                        <div class="Checkout_button">
+                            
+                             
+                             <a download=" <%= compra.nombreProducto %>.rar" href="/productos/archivo/<%= compra.archivoURL %>"><button type="submit">Descargar</button></a> 
+                          
+                          </div>
+                    </td>
+            </tbody>
+            <% }); %>
+        </table>
+       
+        <hr>
+        <br>
+        <h1>Tus Ventas</h2>
    
-   </section>
+            <table class="table tabla-carrito">
+                <thead>
+                        <tr>
+                            <th>Producto</th>
+                            <th>Precio de venta</th>
+                            <th>Fecha de venta</th>
+                        </tr>
+                </thead>
+                <% ventas.forEach(venta => {  %>
+                <tbody>
+                   
+                        <td> <%= venta.nombreProducto %> </td>
+                        <td> $ <%= venta.precioVenta.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 }) %>  </td>
+                        <td> <%= venta.fechaVenta %> </td>
+                        
+                </tbody>
+                <% }); %>
+            </table>
+          
+
+
+    <% } else if (user.tipo === 'normal') { %>
+        <h1>Tus Compras</h2>
+        <table class="table tabla-carrito">
+            <thead>
+                    <tr>
+                        <th>Producto</th>
+                        <th>Descripcion</th>
+                        <th>Descarga</th>
+                    </tr>
+            </thead>
+        </table>
+
+
+   <% } %>
+    <hr>
+    <br>
+    <div class="btn-box">
+        <a href="/perfil/logout" class="btn">Cerrar sesión</a>
+    </div>
+
+</section>
+
 
    <% } else { %>
 
@@ -55,8 +139,9 @@
              
  
      <div class="btn-box2">
-                 <input class="btn2" href="#" type="submit"  name="login" value="Acceder" onclick="cambiarNavbar()">
-                 <a class="btn2" href="#registro" type="submit" name="registrarse" value="registro">Registrarse</a>
+                 <input class="btn2" href="#" type="submit"  name="login" value="Acceder">
+                 <a class="btn2" href="#" type="submit" name="login" value="Acceder">Acceder</a>
+               
          
      </div>
 
