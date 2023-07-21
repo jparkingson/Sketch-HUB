@@ -4,23 +4,44 @@ const db = require('../../db/db');
 
 // Ruta de acción del formulario
 router.post('/actualizarPerfil', (req, res) => {
-  const { nombre, apellido, correo, telefono, direccion, ciudad, estado, postal, etiqueta1, etiqueta2, etiqueta3, descripcion } = req.body;
+  const { idDisenador, idUsuario, nombre, apellido, correo, telefono, direccion, ciudad, estado, postal, etiqueta1, etiqueta2, etiqueta3, descripcion } = req.body;
 
-  // Actualizar los datos en la base de datos en la tabla diseñador
-  const query1 = 'UPDATE disenador SET descripcionPerfil = ?, etiqueta1 = ?, etiqueta2 = ?, etiqueta3 = ? WHERE idDisenador = 1';
+  const query1 = 'UPDATE disenador SET descripcionPerfil = ?, etiqueta1 = ?, etiqueta2 = ?, etiqueta3 = ? WHERE idDisenador = ?';
 
-  const query2 = 'UPDATE usuario SET nombre = ?,  apellido = ?, correo = ?, telefono = ?, direccion = ?, ciudad = ?, estado = ?, codigoPostal = ? WHERE idUsuario = 5';
+  const query2 = 'UPDATE usuario SET nombre = ?,  apellido = ?, correo = ?, telefono = ?, direccion = ?, ciudad = ?, estado = ?, codigoPostal = ? WHERE idUsuario = ?';
 
-  db.query(query1, [descripcion, etiqueta1, etiqueta2, etiqueta3], (error, result) => {
+  db.query(query1, [descripcion, etiqueta1, etiqueta2, etiqueta3, idDisenador], (error, result) => {
     if (error) {
       console.error('Error al actualizar los datos en la base de datos:', error);
       return res.status(500).send('Error al actualizar los datos en la base de datos');
     }
-    console.log('Datos actualizados correctamente en la base de datos');
-    res.redirect('/perfil-creador'); // Redirigir a una página de éxito
-  });
+    console.log('Datos actualizados correctamente en la tabla disenador');
 
-  db.query(query2, [nombre, apellido, correo, telefono, direccion, ciudad, estado, postal], (error, result) => {
+    // Call the second query inside the callback of the first one
+    db.query(query2, [nombre, apellido, correo, telefono, direccion, ciudad, estado, postal, idUsuario], (error, result) => {
+      if (error) {
+        console.error('Error al actualizar los datos en la base de datos:', error);
+        return res.status(500).send('Error al actualizar los datos en la base de datos');
+      }
+      console.log('Datos actualizados correctamente en la tabla usuario');
+      res.redirect('/perfil'); // Redirect to a success page
+    });
+  });
+});
+
+
+router.post('/actualizarPerfilUsuario', (req, res) => {
+  const { nombre, apellido, correo, telefono, direccion, ciudad, estado, postal} = req.body;
+ 
+  const idUsuario = req.session.idUsuario;
+  // Actualizar los datos en la base de datos en la tabla diseñador
+
+
+  const query2 = 'UPDATE usuario SET nombre = ?,  apellido = ?, correo = ?, telefono = ?, direccion = ?, ciudad = ?, estado = ?, codigoPostal = ? WHERE idUsuario = ?';
+
+ 
+
+  db.query(query2, [nombre, apellido, correo, telefono, direccion, ciudad, estado, postal, idUsuario], (error, result) => {
     if (error) {
       console.error('Error al actualizar los datos en la base de datos:', error);
       return res.status(500).send('Error al actualizar los datos en la base de datos');
@@ -30,5 +51,6 @@ router.post('/actualizarPerfil', (req, res) => {
 
 
 });
+
 
 module.exports = router;

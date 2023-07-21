@@ -1,28 +1,32 @@
-<%- include('../sections/header'); %>
+<%- include('../sections/header-c'); %>
 
-<section class="users-content">
+<section class="users">
 
   <div class="container">
     <h1>Diseñadores</h1>
-    <h3>Observa los diseñadores encargados de toda la magia de nuestra plataforma!</h3>
+    <h2 class="center">Observa los diseñadores encargados de toda la magia de nuestra plataforma!</h3>
     <hr>
     <% diseñadores.forEach((diseñador) => { %>
-      <div class="user" id="user-<%= diseñador.idDisenador %>">
       
-        <img class="user-img" src="/img/usuario.png" alt="Liquid Color Banner">
-        <h2 class="user-title"><%= diseñador.nombre %> <i class="fa-solid fa-check"></i></h2>
-        <a href="#" class="ver-perfil" data-id="<%= diseñador.idDisenador %>">Ver perfil</a>
+      <div class="users-container">
+        <div class="user" id="user-<%= diseñador.idDisenador %>">
+          <img class="perfil-img" src="/perfil/usuarioFoto/<%= diseñador.imgperfil %>" alt="Liquid Color Banner">
+          <h2 class="user-title"><%= diseñador.nombre %> <%= diseñador.apellido %> <i class="fa-solid fa-check"></i></h2>
+          <a href="#" class="ver-perfil" data-id="<%= diseñador.idDisenador %>"><button class="ver-perfil">Ver perfil</button></a>
+        </div>
+       
       </div>
 
+   
       <!-- Create a separate profile container for each designer -->
       <div class="perfil-diseñador" id="perfil-<%= diseñador.idDisenador %>" style="display: none;">
     
         <div class="perfil-content">
-            <h1>Diseñador</h2>
-                <hr>
-                <img class="perfil-img" src="/img/usuario.png" alt="Usuario">
-                <h2> <%= diseñador.idDisenador %> <%= diseñador.nombre  %> <%= diseñador.apellido %> <i class="fa-solid fa-check"></i></h2>
-               
+           
+                <img class="perfil-img" src="/perfil/usuarioFoto/<%= diseñador.imgperfil %>" alt="Usuario">
+                <h2><%= diseñador.nombre  %> <%= diseñador.apellido %> <i class="fa-solid fa-check"></i></h2>
+                <h3><%= diseñador.descripcionPerfil %></h3>
+                <div class="etiquetas-container"></div>
                 <hr>
         </div>
        

@@ -2,13 +2,13 @@
 <% if (user) { %>
 <section class="">
     <h1 class="mb-5">Ajustes de perfil</h1>
+    <% if (user.tipo === 'diseñador'){ %>   
     <div class="container">
-        
         <div class="bg-white shadow rounded-lg d-block d-sm-flex">
             <div class="profile-tab-nav border-right">
                 <div class="p-4">
                     <div class="img-circle text-center mb-3">
-                        <img src="/img/usuario.png" alt="Image" class="shadow">
+                        <img src="/perfil/usuarioFoto/<%= user.img %>" alt="Image" class="shadow">
                     </div>
                     <h4 class="text-center">Diseñador</h4>
                 </div>
@@ -24,58 +24,60 @@
                    
                 </div>
             </div>
+
             <div class="tab-content p-4 p-md-5" id="v-pills-tabContent">
                 <div class="tab-pane fade show active" id="account" role="tabpanel" aria-labelledby="account-tab">
                     <form id="form" method="POST" action="/actualizar/actualizarPerfil">
                         <h3 class="mb-4"></h3>
                         <div class="row">
-                        
+                        <input type="hidden" name="idDisenador" value="<%= user.idDisenador %>" placeholder="<%= user.idDisenador %>">
+                        <input type="hidden" name="idUsuario" value="<%= user.idUsuario %>" placeholder="<%= user.idUsuario %>">
                         <div class="col-md-6">
                             <div class="form-group">
                                   <label>Nombre</label>
-                                  <input type="text" name="nombre" class="form-control" placeholder="<%= user.nombre %> " required>
+                                  <input type="text" name="nombre" class="form-control" placeholder="<%= user.nombre %>.. " required>
                             </div>
                         </div>
                         <div class="col-md-6">
                             <div class="form-group">
                                   <label>Apellido</label>
-                                  <input type="text" name="apellido" class="form-control" placeholder=" <%= user.idUsuario %> " required>
+                                  <input type="text" name="apellido" class="form-control" placeholder=" <%= user.apellido %>.. " required>
                             </div>
                         </div>
                         <div class="col-md-6">
                             <div class="form-group">
                                   <label>Correo</label>
-                                  <input type="text" name="correo" class="form-control" placeholder="diseñador@gmail.com" required>
+                                  <input type="text" name="correo" class="form-control" placeholder="  <%= user.correo %>.. ">
                             </div>
                         </div>
                         <div class="col-md-6">
                             <div class="form-group">
                                   <label>Número de teléfono</label>
-                                  <input type="text" name="telefono" class="form-control" placeholder="+507 0000-0000" required>
+                                  <input type="text" name="telefono" class="form-control" placeholder=" <%= user.telefono %>.. " required>
                             </div>
                         </div>
                         <div class="col-md-6">
                             <div class="form-group">
                                   <label>Dirección</label>
-                                  <input type="text" name="direccion" class="form-control" placeholder="Calle..." required>
+                                  <input type="text" name="direccion" class="form-control" placeholder=" <%= user.direccion %>.. " required>
                             </div>
                         </div>
                         <div class="col-md-6">
                             <div class="form-group">
                                   <label>Ciudad</label>
-                                  <input type="text" name="ciudad" class="form-control" placeholder="Ciudad de Panamá" required>
+                                  <input type="text" name="ciudad" class="form-control" placeholder="  <%= user.ciudad %>.. " required>
                             </div>
                         </div>
                         <div class="col-md-6">
                             <div class="form-group">
                                   <label>Estado</label>
-                                  <input type="text" name="estado" class="form-control" placeholder="Panamá" required>
+                                  <input type="text" name="estado" class="form-control" placeholder="  <%= user.estado %>.. " required>
                             </div>
                         </div>
                         <div class="col-md-6">
                             <div class="form-group">
                                   <label>Codigo Postal</label>
-                                  <input type="text" name="postal" class="form-control" placeholder="0000" required>
+                                  <input type="text" name="postal" class="form-control" placeholder=" <%= user.codigoPostal %>.. " required>
                             </div>
                         </div>
                         
@@ -108,7 +110,7 @@
                     </div>
                     <div>
                         <button class="btn btn-primary" id="actualizar" type="submit">Actualizar</button>
-                        <button class="btn btn-light">Cancel</button>
+                  
                     </div>
                     </form>
                     
@@ -139,34 +141,156 @@
                     </div>
                     <div>
                         <button class="btn btn-primary">Update</button>
-                        <button class="btn btn-light">Cancel</button>
+                       
                     </div>
                 </div>
             </div>
         </div>
     </div>
 
-    <% if (user.tipo === 'Normal'){ %>
-
+            <% } else if (user.tipo2 === 'normal') { %> 
+                <div class="container">
+                    <div class="bg-white shadow rounded-lg d-block d-sm-flex">
+                        <div class="profile-tab-nav border-right">
+                            <div class="p-4">
+                                <div class="img-circle text-center mb-3">
+                                    <img src="/perfil/usuarioFoto/<%= user.img %>" alt="Image" class="shadow">
+                                </div>
+                                <h4 class="text-center">Diseñador</h4>
+                            </div>
+                            <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
+                                <a class="nav-link active" id="account-tab" data-toggle="pill" href="#account" role="tab" aria-controls="account" aria-selected="true">
+                                    <i class="fa fa-home text-center mr-1"></i> 
+                                    Cuenta
+                                </a>
+                                <a class="nav-link" id="password-tab" data-toggle="pill" href="#password" role="tab" aria-controls="password" aria-selected="false">
+                                    <i class="fa fa-key text-center mr-1"></i> 
+                                    Contaseña
+                                </a>
+                               
+                            </div>
+                        </div>
+            
+                        <div class="tab-content p-4 p-md-5" id="v-pills-tabContent">
+                            <div class="tab-pane fade show active" id="account" role="tabpanel" aria-labelledby="account-tab">
+                                <form id="form" method="POST" action="/actualizar/actualizarPerfil">
+                                    <h3 class="mb-4"></h3>
+                                    <div class="row">
+                                    <input type="hidden" name="idDisenador" value="<%= user.idDisenador %>" placeholder="<%= user.idDisenador %>">
+                                    <input type="hidden" name="idUsuario" value="<%= user.idUsuario %>" placeholder="<%= user.idUsuario %>">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                              <label>Nombre</label>
+                                              <input type="text" name="nombre" class="form-control" placeholder="<%= user.nombre %>.. " required>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                              <label>Apellido</label>
+                                              <input type="text" name="apellido" class="form-control" placeholder=" <%= user.apellido %>.. " required>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                              <label>Correo</label>
+                                              <input type="text" name="correo" class="form-control" placeholder="  <%= user.correo %>.. " value="<%= user.correo %>" required>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                              <label>Número de teléfono</label>
+                                              <input type="text" name="telefono" class="form-control" placeholder=" <%= user.telefono %>.. " required>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                              <label>Dirección</label>
+                                              <input type="text" name="direccion" class="form-control" placeholder=" <%= user.direccion %>.. " required>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                              <label>Ciudad</label>
+                                              <input type="text" name="ciudad" class="form-control" placeholder="  <%= user.ciudad %>.. " required>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                              <label>Estado</label>
+                                              <input type="text" name="estado" class="form-control" placeholder="  <%= user.estado %>.. " required>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                              <label>Codigo Postal</label>
+                                              <input type="text" name="postal" class="form-control" placeholder=" <%= user.codigoPostal %>.. " required>
+                                        </div>
+                                    </div>
+                                    
+                                    
+                                   
+                                </div>
+                                <div>
+                                    <button class="btn btn-primary" id="actualizar" type="submit">Actualizar</button>
+                                   
+                                </div>
+                                </form>
+                                
+                            </div>
+                            <div class="tab-pane fade" id="password" role="tabpanel" aria-labelledby="password-tab">
+                                <h3 class="mb-4">Password Settings</h3>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                              <label>Contraseña anterior</label>
+                                              <input type="password" class="form-control">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                              <label>Contraseña nueva</label>
+                                              <input type="password" class="form-control">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                              <label>Confirmar contraseña</label>
+                                              <input type="password" class="form-control">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div>
+                                    <button class="btn btn-primary">Update</button>
+                                    
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>     
+      
+        
+   <br>
+   <hr>
     <div class="btn-box">
-        <h2>¿Quieres verificar tu cuenta como diseñador para empezar a vender tus diseños personales?</h2>
+        <h2  >¿Quieres verificar tu cuenta como diseñador para empezar a vender tus diseños personales?</h2>
+    </div>
+
+   
+    <div class="btn-box">
+      
         <a class="btn" href="/verificado" >Obtén el verificado</a>
       
     </div>
-
-    <% } else if (user.tipo === 'normal') { %>
-
-
-        <% } %>
-
+    <% } %>
 </section>
-
 <% } else { %>
 
     <section>
         <h1 class="mb-5">Acceso restringido</h1>
         <p>Debes iniciar sesión o registrarte para acceder a esta página.</p>
-        <a href="/inicio-ses">Iniciar sesión</a> | <a href="/registro">Registrarse</a>
+        <a href="/perfil">Iniciar sesión</a> | <a href="/perfil">Registrarse</a>
       </section>
 
       <% } %>

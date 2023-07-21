@@ -1,6 +1,7 @@
 
 <%- include('../sections/header'); %>
 
+
 <% if (user) { %>
 
 <script type="text/javascript" src="js/cargar-etiquetas.js"></script> 
@@ -10,16 +11,21 @@
 
     <div class="perfil-content">
         <h1>Perfil</h2>
+           
             <hr>
-            <img class="perfil-img" src="/img/usuario.png" alt="Usuario">
-            <h2> <%= user.nombre  %> <%= user.apellido %> <%= user.tipo %></h2>
+           
+                    <img class="perfil-img" src="/perfil/usuarioFoto/<%= user.img %>" alt="<%= user.imgperfil %>">
+               
+          
+           
+            <h2> <%= user.nombre  %> <%= user.apellido %> </h2>
             <div class="etiquetas-container"></div>
             <div class="btn-box">
                 <a href="/editar-perfil" class="btn">Editar Perfil</a>
             </div>
-            <hr>
+           
     </div>
-
+<br>
     <% if (user.tipo === 'diseñador'){  %>
 
     <div class="btn-box">
@@ -36,7 +42,8 @@
         <% }); %>
     </div>
 
-
+    <hr>
+    <br>
 
     <h1>Tus Compras</h2>
        
@@ -54,7 +61,7 @@
                
                     <td> <%= compra.nombreProducto %> </td>
                     <td> $ <%= compra.precioCompra.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 }) %> %>  </td>
-                    <td> <%= compra.fechaCompra %> </td>
+                    <td> <%=  compra.fechaCompra  %> </td>
                     <td> 
                         <div class="Checkout_button">
                             
@@ -68,6 +75,7 @@
         </table>
        
         <hr>
+        <br>
         <br>
         <h1>Tus Ventas</h2>
    
@@ -92,17 +100,37 @@
           
 
 
-    <% } else if (user.tipo === 'normal') { %>
+    <% } %> 
+    <% if (user.tipo2 === 'normal') { %>
+        <hr>
         <h1>Tus Compras</h2>
-        <table class="table tabla-carrito">
-            <thead>
-                    <tr>
-                        <th>Producto</th>
-                        <th>Descripcion</th>
-                        <th>Descarga</th>
-                    </tr>
-            </thead>
-        </table>
+          
+            <table class="table tabla-carrito">
+                <thead>
+                        <tr>
+                            <th>Producto</th>
+                            <th>Precio de Compra</th>
+                            <th>Fecha de Compra</th>
+                            <th>Descarga</th>
+                        </tr>
+                </thead>
+                <% compras.forEach(compra => {  %>
+                <tbody>
+                   
+                        <td> <%= compra.nombreProducto %> </td>
+                        <td> $ <%= compra.precioCompra.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 }) %> %>  </td>
+                        <td> <%= compra.fechaCompra %> </td>
+                        <td> 
+                            <div class="Checkout_button">
+                                
+                                 
+                                 <a download=" <%= compra.nombreProducto %>.rar" href="/productos/archivo/<%= compra.archivoURL %>"><button type="submit">Descargar</button></a> 
+                              
+                              </div>
+                        </td>
+                </tbody>
+                <% }); %>
+            </table>
 
 
    <% } %>
@@ -140,28 +168,25 @@
  
      <div class="btn-box2">
                  <input class="btn2" href="#" type="submit"  name="login" value="Acceder">
-                 <a class="btn2" href="#" type="submit" name="login" value="Acceder">Acceder</a>
+                 
                
          
      </div>
 
  
 <br>
-         
-     <p >
-         <a class="olvide" href="/olvide">¿Olvidaste la contraseña?</a>
-     </p>
-     
+    
+    
  </div>
      </form>
  </div>
-
+ <hr>
 </section> 
 <section class="bodylog1">  
  <div id="registro" class="register">
      <h2>Registrate!</h2>
 
-     <form action="/perfil/validar" class="form2" method="post" >	
+     <form action="/perfil/validar" class="form2" method="post" enctype="multipart/form-data">	
          <p>
              <label class="text" for="reg_username">Nombre&nbsp;<span class="required">*</span></label>
              <input type="text" class="user" name="reg_name" id="reg_name" autocomplete="name" value="" required/>				
@@ -201,11 +226,12 @@
              <input type="text" class="user" name="reg_postal" id="reg_postal" autocomplete="postal" value="" />				
          </p>
 
-         <p>
-             <label class="text" for="reg_photo">Foto&nbsp;<span></span></label>
-             <input type="file" class="user" name="reg_photo" id="reg_photo" accept="image/*" autocomplete="postal" value="" />				
-         </p> 
-           
+         <div class="col-md-6">
+            <div class="form-group">
+              <label>Imagen</label>
+              <input type="file" name="imagen" id="imagen" class="form-control" accept="image/*" required>
+            </div>
+          </div>
          <br><br>
          <p>
              <div class="btn-box2">

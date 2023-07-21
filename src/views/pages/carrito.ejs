@@ -11,7 +11,11 @@
 <!-- carrito.ejs -->
 <table class="table tabla-carrito">
   <thead>
-   
+    <% 
+    if (productos.length > 0) {
+      let total = 0;
+      productos.forEach(item => {
+    %>
 
     <tr>
       <th>Producto</th>
@@ -20,11 +24,7 @@
       <th>Precio</th>
     </tr>
   </thead>
-  <% 
-  if (productos.length > 0) {
-    let total = 0;
-    productos.forEach(item => {
-  %>
+
   <tbody>
     <tr>
       <td>
@@ -63,27 +63,26 @@
     
    
   <% } else { %>
-      <tr>
-        <td colspan="5">No hay productos en el carrito</td>
-      </tr>
+      
     <% } %>
 
   </tbody>
 </table>
-<% if (user) {  %>
-          <div class="Checkout_button">
-        <form action="/paypal/pay" method="POST">
-          <input type="hidden" name="total">
-          <button type="submit">Checkout</button>
-        </form>
-      </div>
-    <% } else { %>
-      <div class="Checkout_button">
-        <a href="/perfil" class="btn"> <h1>Inicia sesión para comprar</h1></a>
-      
-      </div>
-
-    <% } %>
+<% if (user && productos.length > 0) { %>
+  <div class="Checkout_button">
+    <form action="/paypal/pay" method="POST">
+      <button type="submit">Checkout</button>
+    </form>
+  </div>
+<% } else if (user) { %>
+  <div class="Checkout_button">
+    <h1>Tu carrito está vacío</h1>
+  </div>
+<% } else { %>
+  <div class="Checkout_button">
+    <a href="/perfil" class="btn"> <h1>Inicia sesión para comprar</h1></a>
+  </div>
+<% } %>
 
 <script>
 

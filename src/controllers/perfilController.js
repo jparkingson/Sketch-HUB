@@ -3,24 +3,42 @@ const multer = require('multer');
 const cookieParser = require('cookie-parser');
 const SHA256 = require('crypto-js/sha256');
 const session = require('express-session');
+const cors = require('cors');
+const sharp = require('sharp');
+const express = require('express');
+const router = express.Router();
+const path = require('path');
 
-/*
-exports.mostrarPerfilCreador = (req, res) => {
-  if (req.session.user) {
-    // El usuario ha iniciado sesión, mostrar la vista de perfil con la información del usuario
-    const user = req.session.user;
-    res.render('pages/perfil-creador', { user });
-  } else {
-    // El usuario no ha iniciado sesión, mostrar la vista de perfil con los formularios de inicio de sesión y registro
-    res.render('pages/perfil-creador', { user: null });
+const storage = multer.diskStorage({
+  destination: function (req, file, cb) {
+    if (file.fieldname === 'imagen') {
+      cb(null, 'C:/Users/kevin/DS9/Sketch-HUB/public/perfil/usuarioFoto'); //ruta de guardado de la imagen
+    } else if (file.fieldname === 'archivoRAR') {
+      cb(null, 'C:/Users/kevin/DS9/Sketch-HUB/public/productos/archivo'); //ruta de guardado del archivo
+    } else {
+      cb(new Error('Campo de archivo no válido'));
+    }
+  },
+  filename: function (req, file, cb) {
+    const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1E9);
+    const extension = path.extname(file.originalname);
+    cb(null, uniqueSuffix + extension);
   }
-  };
-  */
-/*
-exports.registro = (req, res) => {
-    const datos = req.body;
-  
+});
 
+const upload = multer({ storage: storage }).fields([
+  { name: 'imagen', maxCount: 1 }
+]);
+
+exports.registro = (req, res) => {
+  // Llamamos al middleware 'upload' para manejar los archivos enviados en la solicitud
+  upload(req, res, function (err) {
+    if (err) {
+      console.error('Error al cargar los archivos:', err);
+      return res.status(500).send('Error al cargar los archivos');
+    }
+
+    const datos = req.body;
     let nombre = datos.reg_name;
     let apellido = datos.reg_lastname;
     let correo = datos.reg_email;
@@ -30,14 +48,18 @@ exports.registro = (req, res) => {
     let ciudad = datos.reg_city;
     let estado = datos.reg_estado;
     let codigoPostal = datos.reg_postal;
-    let foto = req.file;
-  
+
+    // Obtenemos la ruta de la imagen subida desde el middleware 'upload'
+    const rutaImagen = req.files['imagen'] ? req.files['imagen'][0].path : null;
+
+    // Obtener solo el nombre del archivo, sin la ruta completa
+    const nombreImagen = rutaImagen ? path.basename(rutaImagen) : null;
+
     let hashedPassword = SHA256(contras).toString();
-  
-  
-    let buscar = "SELECT * FROM usuario WHERE correo = '" + correo + "'";
-    let registrar = "INSERT INTO usuario (nombre, apellido, correo, contrasena, telefono, direccion, ciudad, estado, codigoPostal, imgperfil) VALUES ('" + nombre + "','" + apellido + "','" + correo + "','" + hashedPassword + "','" + telefono + "','" + direccion + "','" + ciudad + "','" + estado + "','" + codigoPostal + "','" + foto + "')";
-  
+
+    let buscar = "SELECT * FROM usuario WHERE correo = ?";
+    let registrar = "INSERT INTO usuario (nombre, apellido, correo, contrasena, telefono, direccion, ciudad, estado, codigoPostal, imgperfil) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+
     db.query(buscar, [correo], (error, rows) => {
       if (error) {
         console.error(error);
@@ -47,11 +69,18 @@ exports.registro = (req, res) => {
           console.log('Ya existe ese correo');
           res.send('Ya existe ese correo');
         } else {
-          db.query(registrar, (error) => {
+          db.query(registrar, [nombre, apellido, correo, hashedPassword, telefono, direccion, ciudad, estado, codigoPostal, nombreImagen], (error) => {
             if (error) {
               console.error(error);
               res.send('Ocurrió un error al insertar los datos');
             } else {
+              // Iniciar sesión después del registro
+              req.session.user = {
+                nombre,
+                apellido,
+                correo
+              };
+
               console.log('Datos almacenados correctamente');
               res.redirect('/perfil');
             }
@@ -59,69 +88,10 @@ exports.registro = (req, res) => {
         }
       }
     });
-  };
-*/
-/*
-exports.mostrarPerfilCreador = (req, res) => {
-  if (req.session.user) {
-    // El usuario ha iniciado sesión, mostrar la vista de perfil con la información del usuario
-    const user = req.session.user;
-
-    if (user.tipo === 'diseñador') {
-      // Usuario es diseñador, obtener las ventas del diseñador
-      ObtenerVentasPorDisenador(user.idDisenador, (error, ventas) => {
-        if (error) {
-          console.error(error);
-          res.status(500).send('Error interno del servidor');
-        } else {
-          res.render('pages/perfil-creador', { user, ventas });
-        }
-      });
-    } else {
-      // Usuario es normal, no es necesario obtener las ventas, renderizar la vista directamente
-      res.render('pages/perfil-creador', { user });
-    }
-  } else {
-    // El usuario no ha iniciado sesión, mostrar la vista de perfil con los formularios de inicio de sesión y registro
-    res.render('pages/perfil-creador', { user: null });
-  }
-};*/
-/*
-exports.mostrarPerfilCreador = (req, res) => {
-  if (req.session.user) {
-    // El usuario ha iniciado sesión, mostrar la vista de perfil con la información del usuario
-    const user = req.session.user;
-
-    if (user.tipo === 'diseñador') {
-      // Usuario es diseñador, obtener las ventas del diseñador
-      ObtenerVentasPorDisenador(user.idDisenador, (error, ventas) => {
-        if (error) {
-          console.error(error);
-          res.status(500).send('Error interno del servidor');
-        } else {
-          // Aquí realizamos una nueva consulta para obtener los productos asociados al diseñador
-          const query = 'SELECT * FROM producto WHERE idDisenador = ?';
-          db.query(query, [user.idDisenador], (error, productos) => {
-            if (error) {
-              console.error('Error al obtener los productos del diseñador:', error);
-              res.status(500).send('Error al obtener los productos del diseñador');
-            } else {
-              // Renderizar la vista y pasar tanto las ventas como los productos al EJS
-              res.render('pages/perfil-creador', { user, ventas, productos });
-            }
-          });
-        }
-      });
-    } else {
-      // Usuario es normal, no es necesario obtener las ventas, renderizar la vista directamente
-      res.render('pages/perfil-creador', { user });
-    }
-  } else {
-    // El usuario no ha iniciado sesión, mostrar la vista de perfil con los formularios de inicio de sesión y registro
-    res.render('pages/perfil-creador', { user: null });
-  }
+  });
 };
-*/
+
+
 
 exports.mostrarPerfilCreador = (req, res) => {
   if (req.session.user) {
@@ -174,8 +144,6 @@ exports.mostrarPerfilCreador = (req, res) => {
   }
 };
 
-
-
 function ObtenerVentasPorDisenador(idDisenador, callback) {
   const query = "CALL ObtenerVentasPorDiseñador(?)";
   db.query(query, [idDisenador], (error, results) => {
@@ -202,91 +170,9 @@ function ObtenerComprasPorUsuario(idUsuario, callback) {
 
 
 
-exports.registro = (req, res) => {
-  const datos = req.body;
 
-  let nombre = datos.reg_name;
-  let apellido = datos.reg_lastname;
-  let correo = datos.reg_email;
-  let contras = datos.reg_password;
-  let telefono = datos.reg_phone;
-  let direccion = datos.reg_direccion;
-  let ciudad = datos.reg_city;
-  let estado = datos.reg_estado;
-  let codigoPostal = datos.reg_postal;
-  let foto = req.file;
 
-  let hashedPassword = SHA256(contras).toString();
-
-  let buscar = "SELECT * FROM usuario WHERE correo = ?";
-  let registrar = "INSERT INTO usuario (nombre, apellido, correo, contrasena, telefono, direccion, ciudad, estado, codigoPostal, imgperfil) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
-
-  db.query(buscar, [correo], (error, rows) => {
-    if (error) {
-      console.error(error);
-      res.send('Ocurrió un error en la consulta');
-    } else {
-      if (rows.length > 0) {
-        console.log('Ya existe ese correo');
-        res.send('Ya existe ese correo');
-      } else {
-        db.query(registrar, [nombre, apellido, correo, hashedPassword, telefono, direccion, ciudad, estado, codigoPostal, foto], (error) => {
-          if (error) {
-            console.error(error);
-            res.send('Ocurrió un error al insertar los datos');
-          } else {
-            // Iniciar sesión después del registro
-            req.session.user = {
-              nombre,
-              apellido,
-              correo
-            };
-
-            console.log('Datos almacenados correctamente');
-            res.redirect('/perfil');
-          }
-        });
-      }
-    }
-  });
-};
-
-/*
 exports.login = (req, res) => {
-    const info = req.body;
-  
-    let correo = info.email;
-    let password = info.password;
-  
-    let buscar = "SELECT * FROM usuario WHERE correo = '" + correo + "'";
-  
-    db.query(buscar, (error, rows) => {
-      if (error) {
-        console.error(error);
-        res.send('Ocurrió un error en la consulta');
-      } else {
-        if (rows.length > 0) {
-          let usuario = rows[0]; // Tomar el primer registro encontrado
-          // Hashear la contraseña ingresada por el usuario
-          const hashedPasswordIngresada = SHA256(password).toString();
-  
-          if (usuario.contrasena === hashedPasswordIngresada) {
-            console.log('Inicio de sesión exitoso');
-            res.redirect('/perfil-creador'); // Redirecciona al perfil del creador
-          } else {
-            console.log('Contraseña incorrecta');
-            res.send('Contraseña incorrecta');
-          }
-        } else {
-          console.log('Correo electrónico no encontrado');
-          res.send('Correo electrónico no encontrado');
-        }
-      }
-    });
-  };
-  */
-
-  exports.login = (req, res) => {
     const info = req.body;
   
     let correo = info.email;
@@ -319,6 +205,12 @@ exports.login = (req, res) => {
                     correo: usuario.correo,
                     nombre: usuario.nombre,
                     apellido: usuario.apellido,
+                    telefono: usuario.telefono,
+                    direccion: usuario.direccion,
+                    ciudad: usuario.ciudad,
+                    estado: usuario.estado,
+                    codigoPostal: usuario.codigoPostal,
+                    img: usuario.imgperfil,
                     tipo: 'diseñador'
                   };
                 } else {
@@ -328,7 +220,13 @@ exports.login = (req, res) => {
                     correo: usuario.correo,
                     nombre: usuario.nombre,
                     apellido: usuario.apellido,
-                    tipo: 'normal'
+                    telefono: usuario.telefono,
+                    direccion: usuario.direccion,
+                    ciudad: usuario.ciudad,
+                    estado: usuario.estado,
+                    codigoPostal: usuario.codigoPostal,
+                    img: usuario.imgperfil,
+                    tipo2: 'normal'
                   };
                 }
   

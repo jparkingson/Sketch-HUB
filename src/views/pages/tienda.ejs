@@ -155,6 +155,29 @@
 </script>
 -->
 <script>
+   // Función para mostrar la animación de recarga en el botón
+   function showLoadingAnimation(button) {
+    button.disabled = true; // Deshabilitar el botón para evitar múltiples clics
+    const buttonText = button.innerText;
+    button.innerHTML = '<span class="loading-animation"></span>'; // Agregar el elemento de animación
+    setTimeout(() => {
+      button.innerText = buttonText; // Restaurar el texto original después de un tiempo (simulación de carga)
+      button.disabled = false; // Habilitar el botón nuevamente
+    }, 1000); // Establece el tiempo de espera (en milisegundos) antes de restaurar el texto original
+  }
+
+  // Capturar el envío del formulario
+  document.querySelectorAll('.add-to-cart').forEach(button => {
+    button.addEventListener('click', (event) => {
+      event.preventDefault();
+      const form = button.closest('form');
+      showLoadingAnimation(button); // Mostrar la animación de recarga en el botón
+      // Simular el envío del formulario después de 2 segundos (puedes agregar aquí tu código para enviar el formulario al servidor)
+      setTimeout(() => {
+        form.submit();
+      }, 2000);
+    });
+  });
     // Realizar una solicitud AJAX para agregar el producto al carrito
   const productContainers = document.querySelectorAll('.product');
 

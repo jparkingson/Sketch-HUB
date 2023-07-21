@@ -1,0 +1,97 @@
+/* Estilos para centrar el título */
+.container h1 {
+    text-align: center;
+  }
+  .container h2 {
+    text-align: center;
+  }
+  /* Estilos para mostrar los usuarios uno al lado del otro */
+  .users-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    text-align: center;
+  }
+  
+  /* Estilos para el contenedor de cada usuario */
+  .user {
+    margin-bottom: 30px;
+    padding: 20px;
+    text-align: center;
+    transition: background-color 0.3s ease;
+    transform: translateY(0);
+    opacity: 100;
+    transition: 0.3s all;
+  }
+  
+  /* Estilos para la imagen de perfil del usuario */
+  .perfil-img {
+    width: 150px;
+    height: 150px;
+    object-fit: cover;
+    border-radius: 50%;
+    margin-bottom: 10px;
+    transition: 0.3s all;
+  }
+  .perfil-img:hover {
+    
+    background-color: gray;
+    opacity: 100;
+    transform: translateY(-10px); 
+  }
+
+  
+  /* Estilos para el botón "Ver perfil" */
+  .ver-perfil button {
+    background-color: #686868;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    font-size: 16px;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+    transform: translateY(20px);
+    opacity: 0;
+    transition: 0.3s all;
+  }
+  .ver-perfil button:hover {
+    background-color: gray;
+    opacity: 100;
+    transform: translateY(0); 
+}
+  /* Estilos para el contenedor de cada producto en el perfil del diseñador */
+  .diseñador-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+  }
+  
+  /* Estilos para el contenedor del perfil del diseñador */
+  .perfil-diseñador {
+    display: none;
+  }
+  
+  /* Estilos para el contenido del perfil del diseñador */
+  .perfil-content {
+    text-align: center;
+  }
+  
+  /* Estilos para el título del perfil del diseñador */
+  .perfil-content h2 {
+    margin-bottom: 10px;
+  }
+  
+  /* Estilos para el icono de verificación */
+  .fa-check {
+    color: green;
+    margin-left: 5px;
+  }
+  
+  /* Estilos para el enlace "Volver a la lista de diseñadores" */
+  .volver {
+    display: block;
+    text-align: center;
+    margin-top: 20px;
+  }
+  

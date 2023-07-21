@@ -31,7 +31,7 @@ exports.mostrarDiseñadores = (req, res) => {
 
 
 exports.mostrarDiseñadores = (req, res) => {
-  const query = 'SELECT d.idDisenador, u.nombre, u.apellido FROM disenador d JOIN usuario u ON d.idUsuario = u.idUsuario;';
+  const query = 'SELECT d.idDisenador, d.descripcionPerfil, u.nombre, u.apellido, u.imgperfil FROM disenador d JOIN usuario u ON d.idUsuario = u.idUsuario;';
 
   db.query(query, (error, resultados) => {
     if (error) {

@@ -11,8 +11,11 @@
         <br>
         <div class="btn-box">
             <a class="btn" href="#tienda" >Explora nuestro Catálogo <i class="fa-solid fa-arrow-down"></i></a>
-          
         </div>
+        <br>
+        <div class="btn-box">
+          <a class="btn" href="#diseñador" > Ve alguno de nuestros diseñadores! <i class="fa-solid fa-arrow-down"></i></a>
+      </div>
 
         <span class="animate2" style="--i:2;"></span>  
     </div>
@@ -29,6 +32,9 @@
         <% productos.forEach((producto) => { %>
     <div class="product">
             <img class="product-img" src="/productos/img/<%= producto.imagenURL %>" alt=" <%= producto.nombreProducto %> ">
+            <div class="product-description" id="description-<%= producto.idProducto %>">
+                <%= producto.descripcion %>
+              </div>
             <h2 class="product-title"><%= producto.nombreProducto %></h2>
             <p class="price"><%= producto.precio %></p>
             <p class="price"><%= producto.categoria  %></p>
@@ -44,11 +50,74 @@
         <% }); %>
        <hr>
        <div class="btn-box">
-        <a class="btn"  href="/tienda" >Ver más <i class="fa-solid fa-arrow-right"></i></a>
+        <a class="btn"  href="/tienda" >Ver más productos en la tienda <i class="fa-solid fa-arrow-right"></i></a>
     </div>
     </div>
 </section>
+<hr>
+<section class="users-content" id="diseñador">
 
+  <div class="container">
+    <h1>Diseñadores</h1>
+   
+    <hr>
+    <% diseñadores.forEach((diseñador) => { %>
+      <div class="user" id="user-<%= diseñador.idDisenador %>">
+      
+        <img class="user-img" src="/perfil/usuarioFoto/<%= diseñador.imgperfil %>" alt="Liquid Color Banner">
+        <h2 class="user-title"><%= diseñador.nombre %> <%= diseñador.apellido %><i class="fa-solid fa-check"></i></h2>
+       
+      </div>
+
+      <!-- Create a separate profile container for each designer -->
+    
+      <% }); %>
+  
+  </div>
+  <hr>
+  <div class="btn-box">
+    <a class="btn"  href="/disenador" > Ver más diseñadores y sus perfiles personales! <i class="fa-solid fa-arrow-right"></i></a>
+</div>
+</section>
+<script>
+    // Función para mostrar la animación de recarga en el botón
+    function showLoadingAnimation(button) {
+    button.disabled = true; // Deshabilitar el botón para evitar múltiples clics
+    const buttonText = button.innerText;
+    button.innerHTML = '<span class="loading-animation"></span>'; // Agregar el elemento de animación
+    setTimeout(() => {
+      button.innerText = buttonText; // Restaurar el texto original después de un tiempo (simulación de carga)
+      button.disabled = false; // Habilitar el botón nuevamente
+    }, 1000); // Establece el tiempo de espera (en milisegundos) antes de restaurar el texto original
+  }
+
+  // Capturar el envío del formulario
+  document.querySelectorAll('.add-to-cart').forEach(button => {
+    button.addEventListener('click', (event) => {
+      event.preventDefault();
+      const form = button.closest('form');
+      showLoadingAnimation(button); // Mostrar la animación de recarga en el botón
+      // Simular el envío del formulario después de 2 segundos (puedes agregar aquí tu código para enviar el formulario al servidor)
+      setTimeout(() => {
+        form.submit();
+      }, 1000);
+    });
+  });
+    // Realizar una solicitud AJAX para agregar el producto al carrito
+  const productContainers = document.querySelectorAll('.product');
+
+  productContainers.forEach((productContainer) => {
+    const description = productContainer.querySelector('.product-description');
+
+    productContainer.addEventListener('mouseenter', () => {
+      description.style.display = 'block';
+    });
+
+    productContainer.addEventListener('mouseleave', () => {
+      description.style.display = 'none';
+    });
+  });
+</script>
 
 
 <%- include('../sections/footer'); %>

@@ -9,6 +9,8 @@ router.get('/', indexController.mostrarIndex);
 router.get('/editar-perfil', indexController.mostrarEditarPerfil);
 router.get('/checkout', indexController.mostrarCheckout);
 
+
+
 router.get('/verificado', async (req, res) => {
   try {
       res.render('pages/verificado'); // Aquí debes ajustar el nombre de tu archivo de vista (ejs)

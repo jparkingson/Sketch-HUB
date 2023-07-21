@@ -67,7 +67,7 @@ app.use(express.static(path.join(__dirname,'/node_modules')));
 
 app.get('/etiquetas', (req, res) => {
   const query = 'SELECT etiqueta1, etiqueta2, etiqueta3 FROM disenador WHERE idDisenador = ?';
-  const idDisenador = 1; // Aquí deberías tener la ID del diseñador actual, en este caso, lo he configurado en 1
+  const idDisenador = req.query.idDisenador; // Aquí deberías tener la ID del diseñador actual, en este caso, lo he configurado en 1
 
   db.query(query, [idDisenador], (error, result) => {
     if (error) {
